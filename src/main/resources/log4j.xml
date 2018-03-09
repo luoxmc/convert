@@ -9,23 +9,6 @@
         </layout>
     </appender>
 
-    <!--<appender name="file" class="org.apache.log4j.DailyRollingFileAppender">-->
-        <!--<param name="File" value="/opt/logs/web/xdf.log"/>-->
-        <!--<param name="DatePattern" value=".yyyy-MM-dd"/>-->
-        <!--<param name="Encoding" value="UTF-8"/>-->
-        <!--<param name="Append" value="true"/>-->
-        <!--<layout class="org.apache.log4j.PatternLayout">-->
-            <!--<param name="ConversionPattern"-->
-                   <!--value="[%d{yyyy-MM-dd HH:mm:ss\} %-5p] [%t] (%c:%L) - %m%n"/>-->
-        <!--</layout>-->
-        <!--&lt;!&ndash; <filter class="org.apache.log4j.varia.LevelRangeFilter">-->
-            <!--<param name="levelMin" value="info" />-->
-            <!--<param name="levelMax" value="warn" />-->
-            <!--<param name="AcceptOnMatch" value="true" />-->
-        <!--</filter> &ndash;&gt;-->
-    <!--</appender>-->
-
-
     <logger name="java" additivity="true">
         <level value="warn"/>
     </logger>
@@ -36,8 +19,6 @@
 
     <logger name="net" additivity="false">
         <level value="warn"/>
-        <!--<appender-ref ref="file"/>-->
-        <!--<appender-ref ref="error"/>-->
     </logger>
 
     <logger name="httpclient" additivity="false">
@@ -46,21 +27,15 @@
 
     <logger name="org" additivity="false">
         <level value="warn"/>
-        <!--<appender-ref ref="file"/>-->
-        <!--<appender-ref ref="error"/>-->
         <appender-ref ref="stdout" />
     </logger>
 
     <logger name="com.luo" additivity="false">
         <level value="info"/>
-        <!--<appender-ref ref="file"/>-->
-        <!--<appender-ref ref="error"/>-->
         <appender-ref ref="stdout" />
     </logger>
     <root>
         <level value="debug"/>
-        <!--<appender-ref ref="file"/>-->
         <appender-ref ref="stdout" />
-        <!-- <appender-ref ref="error" /> -->
     </root>
 </log4j:configuration>

@@ -1,19 +1,36 @@
 package com.luo.convert.controller;
 
+import java.util.Map;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
+import org.springframework.web.bind.annotation.*;
 import com.luo.convert.base.response.JsonResponse;
+import com.luo.convert.controller.service.MainService;
+import com.luo.convert.controller.util.ShellUtil;
 
 @Controller
 @RequestMapping("/api")
 public class MainController {
+	private static Logger log = Logger.getLogger(MainController.class);
+	
+	@Autowired
+	private MainService service;
 	
 	@RequestMapping("/convert")
 	@ResponseBody
-    public JsonResponse doConvert(){
-		JsonResponse response = JsonResponse.success();
-		return response;
+    public JsonResponse doConvert(@RequestParam("code") String code,@RequestParam("type") String type){
+		ShellUtil.callShell("pwd");
+	    Map<String,String> result = service.convert(code, type);
+	    if("0".equals(result.get("status"))){
+	    	log.info("------转换成功------");
+	    	JsonResponse response = JsonResponse.success();
+	    	response.addData(result);
+	    	return response;
+	    }else{
+	    	return JsonResponse.failure(-99, result.get("reason"));
+	    }
+	    
     }
+	
 }

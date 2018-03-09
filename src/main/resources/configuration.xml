@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<system>
+
+    <category name="file" description="文件相关配置">
+        <item name="savePath" value="/srv/www/app/convert/files/pre/" description="上传文件存放位置"/>
+        <item name="convertPath" value="/srv/www/app/convert/files/after/" description="转换后文件存放位置"/>
+    </category>
+   
+</system>

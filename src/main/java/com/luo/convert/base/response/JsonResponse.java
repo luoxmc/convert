@@ -2,6 +2,7 @@ package com.luo.convert.base.response;
 
 import java.util.HashMap;
 
+
 public class JsonResponse extends HashMap<String, Object> {
 	private static final long serialVersionUID = 1L;
 	
@@ -22,9 +23,14 @@ public class JsonResponse extends HashMap<String, Object> {
         put(key, value);
         return this;
     }
+    
+    public JsonResponse addData(Object value){
+        put(DATA_KEY, value);
+        return this;
+    }
 
     public static JsonResponse success() {
-        return new JsonResponse(0, "");
+        return new JsonResponse(0, "调用成功");
     }
 
     public static JsonResponse failure(int code, String message) {

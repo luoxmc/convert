@@ -3,12 +3,15 @@ window.onload=function(){
 }
 
 function init(){
-	$("#convert").bind("click",function(){
+	$("#submit").bind("click",function(){
 		$.ajax({
 			url: "/api/convert", 
 			type: "post",
 			dataType: "json",
-			data: {}, 
+			data: {
+				code: $("#code").val(),
+				type: "0"
+			}, 
 			success: function(res){
 				alert(res);
 			}
