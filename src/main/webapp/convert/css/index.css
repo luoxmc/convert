@@ -4,9 +4,38 @@ header{
 	background:#666666;
 }
 header .main{
-	width:200px;
-	height:100%;
-	padding-left:50px;
-	font-size:24px;
-	color: #ffffff;
+	width: 180px;
+    height: 100%;
+    padding-left: 50px;
+    font-size: 26px;
+    color: #ffffff;
+    line-height: 50px;
+    font-weight: bold;
+    font-style: italic;
+    float: left;
 }
+header .head_nav{
+	margin: 0 auto;
+    width: 820px;
+    color: #cacaca;
+    padding: 12px 0;
+    height: 50px;
+}
+header .head_nav li {
+    float: left;
+    line-height: 26px;
+    padding: 0 12px;
+    border-right: 3px solid #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+header .head_nav li:last-child{
+	border:none;
+}
+header .head_nav li:hover{
+	color:#ffffff;
+}
+header .head_nav li.active{
+	color:#ffffff;
+}
+
