@@ -19,6 +19,8 @@
     <!-- 访问静态资源 -->
     <mvc:default-servlet-handler />
     
+    <bean class="com.luo.convert.base.exception.TradeExceptionResolver"/>
+    
     <bean id="jspViewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>

@@ -114,7 +114,6 @@ public class FileUtil {
             return new String(filecontent, encoding);  
         } catch (UnsupportedEncodingException e) {  
         	log.error("The OS does not support " + encoding);
-            e.printStackTrace();  
             return null;  
         }  
     }  
