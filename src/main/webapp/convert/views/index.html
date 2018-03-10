@@ -7,6 +7,7 @@
 <link href="../css/common.css" rel="stylesheet">
 <link href="../css/index.css" rel="stylesheet">
 <script type="text/javascript" src="../plugins/jquery-3.3.1.min.js"></script>
+<script  type="text/javascript" src="../plugins/ace/ace.js"></script>
 <script type="text/javascript" src="../js/index.js"></script>
 </head>
 <body>
@@ -15,19 +16,41 @@
 		<div class="main">convert</div>
 		<div class="head_nav">
             <ul>
-                <li>CSS -&gt; SCSS/SASS/LESS</li>
-                <li>SCSS/SASS/LESS -&gt; CSS</li>
-                <li>批量SCSS/SASS/LESS -&gt; CSS</li>
+                <li class="active" mode="one">CSS -&gt; SCSS/SASS/LESS</li>
+                <li mode="two">SCSS/SASS/LESS -&gt; CSS</li>
+                <li mode="three">批量SCSS/SASS/LESS -&gt; CSS</li>
             </ul>
     	</div>
 	</header>
 	
 	<div class="content">
-		<p>sass</p>
-		<textarea style="width:800px;height:400px;" id="code">
-			
-		</textarea>
-		<div id="submit">submit</div>
+		<div id="mode_one">
+			<ul class="editor_ul">
+				<li>
+					<span class="top_span">CSS  <em>请输入或粘贴你的css代码</em></span>
+					<div class="editorl" id="one_css_editor"></div>
+				</li><li>
+					<span class="top_span">
+						<div class="ckBox">
+					      <input type="checkbox" value="None" id="scss_box" name="check" checked>
+					      <label for="scss_box"></label>
+					    </div>&nbsp;&nbsp;SCSS&nbsp;&nbsp;
+					    <div class="ckBox">
+					      <input type="checkbox" value="None" id="sass_box" name="check" >
+					      <label for="sass_box"></label>
+					    </div>&nbsp;&nbsp;SASS&nbsp;&nbsp;
+					    <div class="ckBox">
+					      <input type="checkbox" value="None" id="less_box" name="check" >
+					      <label for="less_box"></label>
+					    </div>&nbsp;&nbsp;LESS&nbsp;&nbsp;
+					    <em>请选择需要转换的类型</em>
+					</span>
+					<div class="editorl" id="one_other_editor"></div>
+				</li>
+			</ul>
+		</div>
+		<div id="mode_two" style="display:none;"></div>
+		<div id="mode_three" style="display:none;"></div>
 	</div>
 	
 	<footer>

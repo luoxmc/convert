@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import com.luo.convert.base.response.JsonResponse;
 import com.luo.convert.controller.service.MainService;
-import com.luo.convert.controller.util.ShellUtil;
 
 @Controller
 @RequestMapping("/api")
@@ -20,7 +19,6 @@ public class MainController {
 	@RequestMapping("/convert")
 	@ResponseBody
     public JsonResponse doConvert(@RequestParam("code") String code,@RequestParam("type") String type){
-		ShellUtil.callShell("pwd");
 	    Map<String,String> result = service.convert(code, type);
 	    if("0".equals(result.get("status"))){
 	    	log.info("------转换成功------");

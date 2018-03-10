@@ -1,3 +1,7 @@
+body{
+	height: 100%;
+    overflow-y: auto !important;
+}
 header{
 	width:100%;
 	height:50px;
@@ -18,12 +22,12 @@ header .head_nav{
 	margin: 0 auto;
     width: 820px;
     color: #cacaca;
-    padding: 12px 0;
+    padding: 17px 0;
     height: 50px;
 }
 header .head_nav li {
     float: left;
-    line-height: 26px;
+    line-height: 16px;
     padding: 0 12px;
     border-right: 3px solid #fff;
     font-weight: bold;
@@ -38,4 +42,79 @@ header .head_nav li:hover{
 header .head_nav li.active{
 	color:#ffffff;
 }
+.content .editor_ul .top_span
+{
+	display: inline-block;
+    width: 100%;
+    height: 30px;
+    padding: 5px 0;
+    text-indent: 5px;
+}
+.content .editor_ul .top_span em{
+	font-size: 13px;
+    font-style: italic;
+    color: #8c8989;
+}
+.content .editor_ul li{
+	float: left;
+	width:50%;
+	padding: 0 30px;
+}
+.content .editorl{
+	width:100%;
+	height:500px;
+}
 
+/* start 复选框 */
+.ckBox {
+  width: 20px;
+  position: relative;
+  display: inline-block;
+}
+.ckBox label {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: -moz-linear-gradient(top, #222222 0%, #45484d 100%);
+  background: -webkit-linear-gradient(top, #222222 0%, #45484d 100%);
+  background: linear-gradient(to bottom, #222222 0%, #45484d 100%);
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  -moz-box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px rgba(255, 255, 255, 0.4);
+  -webkit-box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px rgba(255, 255, 255, 0.4);
+  box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px rgba(255, 255, 255, 0.4);
+}
+.ckBox label:after {
+  content: '';
+  width: 9px;
+  height: 5px;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  border: 3px solid #fcfff4;
+  border-top: none;
+  border-right: none;
+  background: transparent;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+.ckBox label:hover::after {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+  opacity: 0.3;
+}
+.ckBox input[type=checkbox] {
+  visibility: hidden;
+}
+.ckBox input[type=checkbox]:checked + label:after {
+  filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+  opacity: 1;
+}
+/* end 复选框 */
