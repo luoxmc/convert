@@ -20,13 +20,13 @@ header .main{
 }
 header .head_nav{
 	margin: 0 auto;
-    width: 820px;
+    width: 680px;
     color: #cacaca;
     padding: 17px 0;
     height: 50px;
 }
 header .head_nav li {
-    float: left;
+    display: inline-block;
     line-height: 16px;
     padding: 0 12px;
     border-right: 3px solid #fff;
@@ -42,9 +42,27 @@ header .head_nav li:hover{
 header .head_nav li.active{
 	color:#ffffff;
 }
+footer{
+	width: 100%;
+    height: 80px;
+    background: #666666;
+    margin-top: 30px;
+}
+footer p{
+	color: #ffffff;
+    text-align: center;
+    line-height: 60px;
+}
+footer p a{
+	color: #bbbcbf;
+    font-style: italic;
+}
+.content{
+	padding-top: 10px;
+}
 .content .editor_ul .top_span
 {
-	display: inline-block;
+	float: left;
     width: 100%;
     height: 30px;
     padding: 5px 0;
@@ -56,13 +74,144 @@ header .head_nav li.active{
     color: #8c8989;
 }
 .content .editor_ul li{
-	float: left;
+	display: inline-block;
 	width:50%;
 	padding: 0 30px;
 }
 .content .editorl{
 	width:100%;
 	height:500px;
+}
+.content .opreator_area{
+	height: 80px;
+    padding: 0 30px;
+    margin-top: 10px;
+}
+.content .opreator_area .variable_area{
+	display: inline-block;
+    width: 200px;
+    height: 80px;
+    border: 1px dashed #cacaca;
+    overflow-y: auto;
+    box-sizing: border-box;
+    margin-right: 20px;
+}
+.content .opreator_area .variable_area ul{
+	padding: 3px;
+    font-size: 15px;
+    color: #666;
+}
+.content .opreator_area .variable_area ul li{
+	padding: 2px 0;
+    border-bottom: 1px solid #cacaca;
+    font-family: monospace;
+    line-height: 20px;
+}
+.content .opreator_area .variable_area ul li em{
+	float: right;
+    width: 15px;
+    height: 100%;
+    color: #c50f0f;
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+.content .opreator_area .variable_area ul li span{
+	display: inline-block;
+    width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.content .opreator_area .variable_area .no_var_tip{
+	display: inline-block;
+    width: 100%;
+    height: 100%;
+    line-height: 75px;
+    text-align: center;
+    color: grey;
+}
+.content .opreator_area .var_add{
+	display: inline-block;
+    width: 300px;
+    height: 80px;
+    vertical-align: top;
+    border: 1px solid #cacaca;
+    box-sizing: border-box;
+    margin-right: 20px;
+}
+.content .opreator_area .var_add .addfirst{
+	display: inline-block;
+    width: 260px;
+    height: 78px;
+}
+.content .opreator_area .var_add .addlast{
+	display: inline-block;
+    width: 38px;
+    height: 78px;
+    vertical-align: top;
+    text-align: center;
+    line-height: 78px;
+    font-size: 20px;
+    font-weight: bold;
+    background: #929090;
+    color: #ffffff;
+    cursor: pointer;
+}
+.content .opreator_area .var_add .addlast:active{
+	background:#757474;
+}
+.content .opreator_area .var_add .addfirst em{
+	display: inline-block;
+    width: 100%;
+    line-height: 39px;
+    box-sizing: border-box;
+    text-indent: 5px;
+}
+.content .opreator_area .var_add .addfirst em:first-child{
+	border-bottom: 1px solid #cacaca;
+}
+.content .opreator_area .var_add .addfirst em input{
+	border: none;
+    height: 28px;
+    width: 168px;
+    font-size: 14px;
+    text-indent: 5px;
+    color: #333333;
+}
+.content .opreator_area .do_area{
+	display: inline-block;
+    width: 250px;
+    height: 80px;
+    vertical-align: top;
+    text-align: left;
+    padding-top: 5px;
+    margin-left: 5px;
+}
+.content .opreator_area .do_area em:first-child{
+	display: inline-block;
+    width: 100%;
+    height: 25px;
+}
+.content .opreator_area .do_area em:last-child{
+	display: inline-block;
+    width: 160px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 22px;
+    background: #929090;
+    border-radius: 3px;
+    margin: 5px 0;
+    cursor: pointer;
+}
+.content .opreator_area .do_area em:last-child a{
+	text-decoration: none;
+    color: #ffffff;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+}
+.content .opreator_area .do_area em:last-child a:active{
+	background:#757474;
 }
 
 /* start 复选框 */

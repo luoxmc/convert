@@ -16,9 +16,9 @@
 		<div class="main">convert</div>
 		<div class="head_nav">
             <ul>
-                <li class="active" mode="one">CSS -&gt; SCSS/SASS/LESS</li>
-                <li mode="two">SCSS/SASS/LESS -&gt; CSS</li>
-                <li mode="three">批量SCSS/SASS/LESS -&gt; CSS</li>
+                <li class="active" mode="one">CSS -&gt; SCSS/LESS</li>
+                <li mode="two">SCSS/LESS -&gt; CSS</li>
+                <li mode="three">批量SCSS/LESS -&gt; CSS</li>
             </ul>
     	</div>
 	</header>
@@ -30,15 +30,11 @@
 					<span class="top_span">CSS  <em>请输入或粘贴你的css代码</em></span>
 					<div class="editorl" id="one_css_editor"></div>
 				</li><li>
-					<span class="top_span">
+					<span class="top_span" id="covert_type" ct_type="scss">
 						<div class="ckBox">
 					      <input type="checkbox" value="None" id="scss_box" name="check" checked>
 					      <label for="scss_box"></label>
 					    </div>&nbsp;&nbsp;SCSS&nbsp;&nbsp;
-					    <div class="ckBox">
-					      <input type="checkbox" value="None" id="sass_box" name="check" >
-					      <label for="sass_box"></label>
-					    </div>&nbsp;&nbsp;SASS&nbsp;&nbsp;
 					    <div class="ckBox">
 					      <input type="checkbox" value="None" id="less_box" name="check" >
 					      <label for="less_box"></label>
@@ -48,13 +44,32 @@
 					<div class="editorl" id="one_other_editor"></div>
 				</li>
 			</ul>
+			<div class="opreator_area">
+				<span class="variable_area"><ul id="vars" style="display: none;"></ul><em class="no_var_tip">暂未添加变量</em></span>
+				<span class="var_add">
+					<span class="addfirst">
+						<em>变量名:&nbsp;<input type="text" placeholder="请输入变量名" id="varName"></input></em>
+						<em>变量值:&nbsp;<input type="text" placeholder="请输入变量值" id="varValue"></input></em>
+					</span><span class="addlast" id="doAdd">+</span>
+				</span><span class="do_area">
+					<em>
+						<div class="ckBox">
+					       <input type="checkbox" value="None" id="removeHacks" name="check">
+					       <label for="removeHacks"></label>
+					    </div>&nbsp;&nbsp;去除Hacks和前缀
+					</em>
+					<em>
+						<a id="do_convert" >转换</a>
+					</em>
+				</span>
+			</div>
 		</div>
 		<div id="mode_two" style="display:none;"></div>
 		<div id="mode_three" style="display:none;"></div>
 	</div>
 	
 	<footer>
-	
+		<p>本网站提供sass/less/css代码的在线转换，无需安装复杂的编译环境, 简单快捷。 如果您有任何问题或建议，请 <a href="mailto:luoxmc@vip.qq.com">点击这里</a> 给我发送邮件</p>
 	</footer>
 	
 </body>

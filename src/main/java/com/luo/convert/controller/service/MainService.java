@@ -12,9 +12,9 @@ public class MainService {
 	private static Logger log = Logger.getLogger(MainService.class);
 	
 	/**
-	 * 转换sass/less 到 css
+	 * 转换scss/less 到 css
 	 * @param code
-	 * @param type 0-scss 1-sass 2-less
+	 * @param type 0-scss 1-less
 	 * @return
 	 */
 	public Map<String,String> convert(String code,String type){
@@ -23,9 +23,6 @@ public class MainService {
 	    String suffix = ".scss";//后缀
 	    String command = "scss ";//命令前缀
 	    if("1".equals(type)){
-	    	suffix = ".sass";
-	    	command = "sass ";
-	    }else if("2".equals(type)){
 	    	suffix = ".less";
 	    	command = "/opt/install/node_modules/less/bin/lessc ";//我的less装的有问题，只能用全路径执行，正常的直接用lessc 就行了
 	    }
