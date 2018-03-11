@@ -18,15 +18,17 @@ public class ShellUtil {
         Map<String,String> result = new HashMap<String,String>();
 		try {
 			ps = Runtime.getRuntime().exec(shellString);
-			int err_code = ps.waitFor();
-			result.put("status", String.valueOf(err_code));
-			BufferedReader br = new BufferedReader(new InputStreamReader(ps.getInputStream()));  
+			BufferedReader br = new BufferedReader(new InputStreamReader(ps.getInputStream()));
 	        StringBuffer sb = new StringBuffer();  
 	        String line;  
 	        while ((line = br.readLine()) != null) {  
-	            sb.append(line).append("\n");  
-	        }  
+	            sb.append(line).append("\n");
+	            log.info("===================shell执行当前结果:"+sb.toString());
+	        }
 	        String info = sb.toString();
+	        int err_code = ps.waitFor();
+			log.info("===================shell执行状态代码:"+err_code);
+			result.put("status", String.valueOf(err_code));
 	        result.put("reason", info);
 		} catch (Exception e) {
 			result.put("status", "99");

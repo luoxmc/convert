@@ -38,7 +38,7 @@ public class MainService {
 		sb.append(prePath);
 		sb.append(" ");
 		sb.append(afterPath);
-		if("0".equals(type) || "1".equals(type)){
+		if("0".equals(type)){
 			sb.append(" --sourcemap=none");
 		}
 		String sh = sb.toString();
@@ -50,6 +50,5 @@ public class MainService {
 		}
 		return map;
 	}
-	
 	
 }

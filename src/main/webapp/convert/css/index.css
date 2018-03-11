@@ -101,7 +101,7 @@ footer p a{
 }
 .content .editorl{
 	width:100%;
-	height:500px;
+	height:600px;
 }
 .content .opreator_area{
 	height: 80px;
@@ -142,6 +142,7 @@ footer p a{
     width: 160px;
     overflow: hidden;
     text-overflow: ellipsis;
+    height: 20px;
 }
 .content .opreator_area .variable_area .no_var_tip{
 	display: inline-block;
@@ -233,6 +234,38 @@ footer p a{
 }
 .content .opreator_area .do_area em:last-child a:active{
 	background:#757474;
+}
+.content .two_convert{
+	margin: 0 30px;
+    margin-top: 20px;
+    background: grey;
+    text-align: center;
+    line-height: 45px;
+    color: #ffffff;
+    border-radius: 7px;
+    cursor: pointer;
+}
+.content .two_convert:active{
+	background:#757474;
+}
+.error_tip{
+	position: fixed;
+    top: 55px;
+    z-index: 9999999;
+    width: 250px;
+    left: 50%;
+    margin-left: -125px;
+    text-align: center;
+    line-height: 25px;
+    height: 25px;
+    background: #ff7171;
+    border-radius: 2px;
+    color: #ffffff;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    text-indent: 2px;
+    font-size: 14px;
 }
 
 /* start 复选框 */

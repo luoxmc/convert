@@ -16,6 +16,11 @@ function bindCommonEvent(){
 		var mode = $(this).attr("mode");
 		$(this).addClass("active").siblings().removeClass("active");
 		$("#mode_"+mode).show().siblings().hide();
+		if(mode=="one"){
+			initTabOne();
+		}else if(mode=="two"){
+			initTabTwo();
+		}
 	});
 }
 
@@ -29,6 +34,7 @@ function initTabOne(){
 	one_css_editor.setTheme("ace/theme/monokai");
 	setOtherEditor("scss","one");
 	//绑定转换类型选择按钮点击事件
+	$("#mode_one li .ckBox input").unbind("click");
 	$("#mode_one li .ckBox input").bind("click",function(){
 		if($(this).is(":checked")){
 			$(this).parent().siblings().find("input").prop("checked",false);
@@ -50,6 +56,7 @@ function initTabOne(){
 		setOtherEditor(type,"one");
 	});
 	/***绑定变量新增事件***/
+	$("#mode_one #doAdd").unbind("click")
 	$("#mode_one #doAdd").bind("click",function(){
 		var name = $("#mode_one #varName").val().replace(/[\n;]/,"");
 		var value = $("#mode_one #varValue").val().replace(/[\n;]/,"");
@@ -64,7 +71,7 @@ function initTabOne(){
 		var var_tag = $("#mode_one #covert_type").attr("ct_type") == "scss" ? "$" : "@";
 		var var_one = var_tag + name +":"+value+";"
 		$("#mode_one #vars").append("<li var_one='"+var_one+"'><span>"+var_one+"</span><em>x<em></li>").show();
-		$("#mode_one #vars li em").unbind();
+		$("#mode_one #vars li em").unbind("click");
 		$("#mode_one #vars li em").bind("click",function(){//删除变量绑定事件
 			$(this).parent().remove();
 			if($("#mode_one #vars li").length<=0){
@@ -77,10 +84,12 @@ function initTabOne(){
 		$("#mode_one .opreator_area .no_var_tip").hide();
 	});
 	/***绑定转换事件***/
+	$("#mode_one #do_convert").unbind("click");
 	$("#mode_one #do_convert").bind("click",function(){
 		parseInput();
 	});
 	/**绑定演示代码按钮点击事件**/
+	$("#mode_one #cssDemo").unbind("click");
 	$("#mode_one #cssDemo").bind("click",function(){
 		one_css_editor.setValue($("#cssDemoCode").html());
 		one_css_editor.gotoLine(1);
@@ -89,26 +98,68 @@ function initTabOne(){
 
 /**初始化scss/less->css**/
 function initTabTwo(){
-	
+	//初始化编辑器
+	two_css_editor = ace.edit("two_css_editor", {
+	    mode: "ace/mode/scss",
+	    selectionStyle: "text"
+	});
+	two_css_editor.setTheme("ace/theme/monokai");
+	setOtherEditor("scss","two");
+	//绑定转换类型选择按钮点击事件
+	$("#mode_two li .ckBox input").unbind("click");
+	$("#mode_two li .ckBox input").bind("click",function(){
+		if($(this).is(":checked")){
+			$(this).parent().siblings().find("input").prop("checked",false);
+		}else{//取消选中
+			$(this).prop("checked",true);
+		}
+		$("#mode_two #other_covert_type").attr("ct_type",$(this).attr("id").substring(0,$(this).attr("id").indexOf("_check")));
+		var type = "";
+		$("#mode_two li .ckBox input").each(function(){
+			if($(this).is(":checked")) {
+			    type = $(this).attr("id").substring(0,$(this).attr("id").indexOf("_check"));
+			}
+		});
+		setOtherEditor(type,"two");
+	});
+	/***绑定转换事件***/
+	$("#mode_two #two_convert").unbind("click");
+	$("#mode_two #two_convert").bind("click",function(){
+		$.ajax({
+		url: "/api/convert", 
+		type: "post",
+		dataType: "json",
+		data: {
+			"code": two_other_editor.getValue(),
+			"type": $("#mode_two #other_covert_type").attr("ct_type") == "scss" ? "0" : "1"
+		}, 
+		success: function(res){
+			if(res.error_no == 0){
+				var result = res.result;
+				if(result.status == "0"){
+					two_css_editor.setValue(result.code);
+					two_css_editor.gotoLine(1);
+				}
+			}else{
+				$("#error_msg").html("转换失败，请检查代码格式").show();
+				setTimeout(function(){
+					$("#error_msg").html("").hide();
+				},2000);
+			}
+		}
+	});
+	});
+	/**绑定演示代码按钮点击事件**/
+	$("#mode_two #otherDemo").unbind("click");
+	$("#mode_two #otherDemo").bind("click",function(){
+		two_other_editor.setValue($("#"+$("#mode_two #other_covert_type").attr("ct_type")+"DemoCode").html().replace(/&amp;/g, '&'));
+		two_other_editor.gotoLine(1);
+	});
 }
 
 /**初始化批量scss/less->css**/
 function initTabThree(){
-//	$("#submit").bind("click",function(){
-//	$.ajax({
-//		url: "/api/convert", 
-//		type: "post",
-//		dataType: "json",
-//		data: {
-//			"code": one_css_editor.getValue(),
-//			"type": "0"
-//		}, 
-//		success: function(res){
-//			alert(res);
-//		}
-//	
-//	});
-//});
+
 }
 
 /**
@@ -325,8 +376,11 @@ function parseCSS(s) {
 			path.declarations.push(declaration);
 		});
 	});
-
-	return exportObject(least);
+	var varstr = "";
+	$("#mode_one #vars li").each(function(){
+		varstr += $(this).attr("var_one") + '\n';
+	});
+	return varstr + exportObject(least);
 }
 var depth=0;
 var s='';
