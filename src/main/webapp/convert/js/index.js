@@ -80,21 +80,11 @@ function initTabOne(){
 	$("#mode_one #do_convert").bind("click",function(){
 		parseInput();
 	});
-//	$("#submit").bind("click",function(){
-//		$.ajax({
-//			url: "/api/convert", 
-//			type: "post",
-//			dataType: "json",
-//			data: {
-//				"code": one_css_editor.getValue(),
-//				"type": "0"
-//			}, 
-//			success: function(res){
-//				alert(res);
-//			}
-//		
-//		});
-//	});
+	/**绑定演示代码按钮点击事件**/
+	$("#mode_one #cssDemo").bind("click",function(){
+		one_css_editor.setValue($("#cssDemoCode").html());
+		one_css_editor.gotoLine(1);
+	});
 }
 
 /**初始化scss/less->css**/
@@ -104,7 +94,21 @@ function initTabTwo(){
 
 /**初始化批量scss/less->css**/
 function initTabThree(){
-	
+//	$("#submit").bind("click",function(){
+//	$.ajax({
+//		url: "/api/convert", 
+//		type: "post",
+//		dataType: "json",
+//		data: {
+//			"code": one_css_editor.getValue(),
+//			"type": "0"
+//		}, 
+//		success: function(res){
+//			alert(res);
+//		}
+//	
+//	});
+//});
 }
 
 /**

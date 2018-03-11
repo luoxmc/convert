@@ -68,6 +68,27 @@ footer p a{
     padding: 5px 0;
     text-indent: 5px;
 }
+.content .editor_ul .top_span
+{
+	float: left;
+    width: 100%;
+    height: 30px;
+    padding: 5px 0;
+    text-indent: 5px;
+}
+.content .editor_ul .top_span .cssDemo{
+	float: right;
+    margin-right: 5px;
+    width: 80px;
+    line-height: 20px;
+    border: 1px solid #cacaca;
+    border-radius: 2px;
+    text-align: center;
+    cursor: pointer;
+}
+.content .editor_ul .top_span .cssDemo:active{
+	background:#cacaca;
+}
 .content .editor_ul .top_span em{
 	font-size: 13px;
     font-style: italic;
