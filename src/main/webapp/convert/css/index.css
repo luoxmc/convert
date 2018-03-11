@@ -219,7 +219,7 @@ footer p a{
     width: 160px;
     line-height: 40px;
     text-align: center;
-    font-size: 22px;
+    font-size: 20px;
     background: #929090;
     border-radius: 3px;
     margin: 5px 0;
@@ -244,6 +244,7 @@ footer p a{
     color: #ffffff;
     border-radius: 7px;
     cursor: pointer;
+    font-size: 20px;
 }
 .content .two_convert:active{
 	background:#757474;
