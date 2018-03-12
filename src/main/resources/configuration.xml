@@ -5,6 +5,8 @@
         <item name="savePath" value="/srv/www/app/convert/files/pre/" description="上传代码生成的文件存放位置"/>
         <item name="convertPath" value="/srv/www/app/convert/files/after/" description="代码转换后文件存放位置"/>
         <item name="uploadPath" value="/srv/www/app/convert/files/upload/" description="上传文件存放位置"/>
+        <item name="shellPath" value="/srv/www/app/convert/scripts/deal_files.sh" description="转换脚本存放路径"/>
+        <item name="mappingPath" value="/down/" description="文件上传文件夹再项目中的映射路径"/>
     </category>
    
 </system>

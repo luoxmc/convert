@@ -51,4 +51,31 @@ public class MainService {
 		return map;
 	}
 	
+	/**
+	 * 转换指定路径的压缩包内的代码
+	 * @param path
+	 * @param name
+	 * @param type
+	 * @return 转换后的文件下载路径
+	 */
+	public Map<String,String> covertFile(String path,String name,String type){
+		String shellPath = Constant.SHELL_PATH;
+		StringBuffer sb =  new StringBuffer();
+		sb.append(shellPath);
+		sb.append(" ");
+		sb.append(path);
+		sb.append(" ");
+		sb.append(name);
+		sb.append(" ");
+		sb.append(type);
+		Map<String,String> map = ShellUtil.callShell(sb.toString());//执行转换脚本
+		if(map.get("status").equals("0")){
+			String uploadPath = Constant.FILE_UPLOAD_PATH;
+			String mappingPath = Constant.MAPPING_PATH;
+			String tmp = path.replace(uploadPath, "");// /srv/www/app/convert/files/upload/20180312/544690/  转换后  20180312/544690
+			map.put("url", mappingPath + tmp + "deal_" + name);//域名加上此路径即可下载
+		}
+		return map;
+	}
+	
 }

@@ -8,9 +8,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.log4j.Logger;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
-
-import com.luo.convert.controller.util.Configuration;
-
+import com.luo.convert.base.constant.Constant;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -46,7 +44,6 @@ public class UploadFilter extends OncePerRequestFilter implements Filter {
 
             if (fileItemList != null) {
                 log.debug("web 文件上传开始:");
-                int i = 0;
                 for (FileItem fi : fileItemList) {
                     if (fi.isFormField()) {
                         request.setAttribute(fi.getFieldName(), fi.getString());
@@ -57,7 +54,7 @@ public class UploadFilter extends OncePerRequestFilter implements Filter {
                             break;
                         }
                         String sourceFileName = fi.getName();
-                        String uploadPath =Configuration.getString("file.uploadPath");
+                        String uploadPath = Constant.FILE_UPLOAD_PATH;
                         Date date = new Date();
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
                         String today = sdf.format(date);
@@ -70,7 +67,7 @@ public class UploadFilter extends OncePerRequestFilter implements Filter {
                         try {
                             fi.write(file);
                             fi.delete();
-                            request.setAttribute("file", filePath + sourceFileName);
+                            request.setAttribute("path", filePath);
                             request.setAttribute("name", sourceFileName);
                             request.setAttribute("uploadStatus", "1");
                             log.info("文件保存成功，路径为："+filePath + sourceFileName);

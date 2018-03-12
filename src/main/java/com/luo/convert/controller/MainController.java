@@ -42,13 +42,21 @@ public class MainController {
 		if("0".equals(status)){
 			return JsonResponse.failure(-11,(String)req.getAttribute("uploadMessage"));
 		}
-		String path = (String) req.getAttribute("file");
+		String path = (String) req.getAttribute("path");
 		String name = (String) req.getAttribute("name");
 		String type = (String) req.getAttribute("type");
 		if(StringUtils.isEmpty(path) || StringUtils.isEmpty(name) || StringUtils.isEmpty(type)){
 			return JsonResponse.failure(-12,"文件信息不完整");
 		}
-		return JsonResponse.success();
+		Map<String,String> result = service.covertFile(path, name, type);
+	    if("0".equals(result.get("status"))){
+	    	log.info("------文件转换成功------url为：" + result.get("url"));
+	    	JsonResponse response = JsonResponse.success();
+	    	response.addData(result);
+	    	return response;
+	    }else{
+	    	return JsonResponse.failure(-99, result.get("reason"));
+	    }
 	 }
 	
 }
