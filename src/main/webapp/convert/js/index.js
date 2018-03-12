@@ -20,6 +20,8 @@ function bindCommonEvent(){
 			initTabOne();
 		}else if(mode=="two"){
 			initTabTwo();
+		}else if(mode=="three"){
+			initTabThree();
 		}
 	});
 }
@@ -141,10 +143,7 @@ function initTabTwo(){
 					two_css_editor.gotoLine(1);
 				}
 			}else{
-				$("#error_msg").html("转换失败，请检查代码格式").show();
-				setTimeout(function(){
-					$("#error_msg").html("").hide();
-				},2000);
+				errorMsg("转换失败，请检查代码格式",2000);
 			}
 		}
 	});
@@ -159,7 +158,68 @@ function initTabTwo(){
 
 /**初始化批量scss/less->css**/
 function initTabThree(){
-
+	//绑定转换类型选择按钮点击事件
+	$("#mode_three .ckBox input").unbind("click");
+	$("#mode_three .ckBox input").bind("click",function(){
+		if($(this).is(":checked")){
+			$(this).parent().siblings("div").find("input").prop("checked",false);
+		}else{//取消选中
+			$(this).prop("checked",true);
+		}
+		$("#mode_three #three_covert_type").attr("ct_type",$(this).attr("id").substring(0,$(this).attr("id").indexOf("_file")));
+		var type = "";
+		$("#mode_three .ckBox input").each(function(){
+			if($(this).is(":checked")) {
+			    type = $(this).attr("id").substring(0,$(this).attr("id").indexOf("_file"));
+			}
+		});
+	});
+	//绑定选择文件事件
+	$("#mode_three #upload_file").off("change");
+	$("#mode_three #upload_file").on("change",function(){
+		var file = $("#mode_three #upload_file")[0].files[0];
+		var name = file.name;
+		var size = file.size;
+		if(size >= 1024*1024){
+			size = (size/(1024*1024)).toFixed(2) + "M";
+		}else{
+			size = (size/1024).toFixed(2) + "KB";
+		}
+		$("#mode_three #filename").html(name);
+		$("#mode_three #filesize").html(size);
+		$("#mode_three .file_info").show();
+	});
+	//绑定上传文件事件
+	$("#mode_three #file_convert").unbind("click");
+	$("#mode_three #file_convert").bind("click",function(){
+		var that = $(this);
+		if(!that.hasClass("dis")){
+			that.addClass("dis").html("转换中...");
+			var file = $("#mode_three #upload_file")[0].files[0];
+			if(file.size>5242880){
+				errorMsg("文件大小不能超过5M",1500);
+				that.removeClass("dis").html("开始转换");
+				return;
+			}
+			var formData = new FormData();
+			formData.append("file", file);
+			formData.append("type", $("#mode_three #three_covert_type").attr("ct_type"));
+			$.ajax({
+				url : "/api/file", 
+				type : 'POST', 
+				data : formData, 
+				processData : false, 
+				contentType : false,
+				success : function(res) { 
+					if(res.error_no == 0){
+						that.removeClass("dis").html("开始转换");
+					}else{
+						errorMsg(res.error_info,2000);
+					}
+				}
+			});
+		}
+	});
 }
 
 /**
@@ -184,6 +244,13 @@ function setOtherEditor(type,tab){
 	
 }
 
+//错误信息提示
+function errorMsg(msg,time){
+	$("#error_msg").html(msg ? msg : "未知错误").show();
+	setTimeout(function(){
+		$("#error_msg").html("").hide();
+	},time ? time : 2000);
+}
 
 
 /***********css转换js开始*********/

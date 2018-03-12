@@ -85,15 +85,36 @@
 				</li>
 			</ul>
 			<div class="two_convert" id="two_convert">转换</div>
-			<div class="error_tip" id="error_msg" style="display:none;"></div>
 		</div>
-		<div id="mode_three" style="display:none;"></div>
+		<div id="mode_three" style="display:none;">
+			<div class="upload_area">
+				<p class="tips">请选择类型，并将需要转换的文件放到同一个文件夹中压缩成.rar或者.zip格式后上传</p>
+				<div id="three_covert_type" ct_type="scss">
+					<div class="ckBox">
+					      <input type="checkbox" value="None" id="scss_file" name="check" checked>
+					      <label for="scss_file"></label>
+					    </div>&nbsp;&nbsp;SCSS&nbsp;&nbsp;
+					    <div class="ckBox">
+					      <input type="checkbox" value="None" id="less_file" name="check" >
+					      <label for="less_file"></label>
+					    </div>&nbsp;&nbsp;LESS&nbsp;&nbsp;
+					<a  class="upload_a">选择文件
+					    <input class="input_file" type="file"  accept=".rar,.zip" id="upload_file"/>
+					</a>
+				</div>
+				<div class="file_info" style="display:none;">
+					文件名称:&nbsp;<em id="filename"></em> &nbsp;&nbsp;&nbsp;文件大小:&nbsp;<em id="filesize"></em><br>
+					<a id="file_convert" class="file_convert">开始转换</a>
+				</div>
+			</div>
+		</div>
 	</div>
 	
 	<footer>
 		<p>本网站提供sass/less/css代码的在线转换，无需安装复杂的编译环境, 简单快捷。 如果您有任何问题或建议，请 <a href="mailto:luoxmc@vip.qq.com">点击这里</a> 给我发送邮件</p>
 	</footer>
 	
+	<div class="error_tip" id="error_msg" style="display:none;"></div>
 	
 	<div id="cssDemoCode" style="display:none;">/* Outside Comment */
 header {

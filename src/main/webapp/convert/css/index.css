@@ -269,6 +269,53 @@ footer p a{
     font-size: 14px;
 }
 
+.content .upload_area{
+	padding: 20px;
+    text-align: center;
+}
+.content .upload_area .file_info{
+	margin-top: 20px;
+}
+.content .upload_area .file_info em{
+	color: #666666;
+}
+.content .upload_area .file_info .file_convert{
+	display: inline-block;
+    margin-top: 10px;
+    width: 100px;
+    line-height: 30px;
+    border: 1px solid #cacaca;
+    border-radius: 5px;
+    color: #666;
+    cursor: pointer;
+}
+.content .upload_area .file_info .file_convert.dis{
+    color: #d2cfcf;
+}
+.content .upload_area .tips{
+	margin-bottom: 20px;
+    color: #666666;
+}
+.upload_area .upload_a{
+    padding: 0 10px;
+    border-radius: 2px;
+    height: 20px;
+    line-height: 20px;
+    position: relative;
+    border: 1px solid #999;
+    text-decoration: none;
+    color: #666;
+}
+.upload_area .input_file{
+    position: absolute;
+    overflow: hidden;
+    right: 0;
+    top: 0;
+    opacity: 0;
+    height: 32px;
+    width: 100%;
+}
+
 /* start 复选框 */
 .ckBox {
   width: 20px;
