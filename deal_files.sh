@@ -9,7 +9,7 @@ SOURCE=$2
 PREFIX="${SOURCE%%.*}"
 SUFIX="${SOURCE##*.}"
 
-if [ "rar" =$SUFIX ];then
+if [ "rar" = $SUFIX ];then
 unrar x $2 
 fi
 
@@ -40,5 +40,5 @@ rar a deal_$PREFIX.rar dealcss
 fi
 
 if [ "zip" = $SUFIX ];then
-zip deal_$PREFIX.zip dealcss
+zip -r deal_$PREFIX.zip dealcss
 fi

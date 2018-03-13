@@ -194,6 +194,9 @@ function initTabThree(){
 	$("#mode_three #file_convert").bind("click",function(){
 		var that = $(this);
 		if(!that.hasClass("dis")){
+			if($("#download").length>0){
+				$("#download").remove();
+			}
 			that.addClass("dis").html("转换中...");
 			var file = $("#mode_three #upload_file")[0].files[0];
 			if(file.size>5242880){
@@ -212,9 +215,15 @@ function initTabThree(){
 				contentType : false,
 				success : function(res) { 
 					if(res.error_no == 0){
+						var url = res.result.url;
 						that.removeClass("dis").html("开始转换");
+						window.open(url);
+						var downHtml = '<p id="download" style="margin-top: 15px;font-size: 14px;color: #5ca7a2;">转换成功，若未自动下载，请 ' +
+							'<a style="color: blue;font-style: italic;cursor: pointer;" href="' + url + '">点击此处</a> 重新下载</p>';
+						$(".upload_area .file_info").append(downHtml);
 					}else{
 						errorMsg(res.error_info,2000);
+						that.removeClass("dis").html("开始转换");
 					}
 				}
 			});

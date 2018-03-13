@@ -1,5 +1,6 @@
 package com.luo.convert.controller.service;
 
+import java.io.File;
 import java.util.Map;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
@@ -72,8 +73,14 @@ public class MainService {
 		if(map.get("status").equals("0")){
 			String uploadPath = Constant.FILE_UPLOAD_PATH;
 			String mappingPath = Constant.MAPPING_PATH;
-			String tmp = path.replace(uploadPath, "");// /srv/www/app/convert/files/upload/20180312/544690/  转换后  20180312/544690
-			map.put("url", mappingPath + tmp + "deal_" + name);//域名加上此路径即可下载
+			File file = new File(path + "deal_" + name);
+			if(file.exists()){
+				String tmp = path.replace(uploadPath, "");// /srv/www/app/convert/files/upload/20180312/544690/  转换后  20180312/544690/
+				map.put("url", mappingPath + tmp + "deal_" + name);//域名加上此路径即可下载
+			}else{
+				map.put("status", "998");
+				map.put("reason", "转换失败，请检查文件格式");
+			}
 		}
 		return map;
 	}
