@@ -38,23 +38,19 @@ function initTabOne(){
 	//绑定转换类型选择按钮点击事件
 	$("#mode_one li .ckBox input").unbind("click");
 	$("#mode_one li .ckBox input").bind("click",function(){
+		var type = $(this).attr("id").substring(0,$(this).attr("id").indexOf("_box"));
+		_hmt.push(['_trackEvent', "tab1类型选择", type]);
 		if($(this).is(":checked")){
 			$(this).parent().siblings().find("input").prop("checked",false);
 		}else{//取消选中
 			$(this).prop("checked",true);
 		}
-		$("#mode_one #covert_type").attr("ct_type",$(this).attr("id").substring(0,$(this).attr("id").indexOf("_box")));
+		$("#mode_one #covert_type").attr("ct_type",type);
 		//类型切换移除之前加的变量
 		$("#mode_one #vars li").remove();
 		$("#mode_one .opreator_area .no_var_tip").show();
 		$("#mode_one #vars").hide();
 		
-		var type = "";
-		$("#mode_one li .ckBox input").each(function(){
-			if($(this).is(":checked")) {
-			    type = $(this).attr("id").substring(0,$(this).attr("id").indexOf("_box"));
-			}
-		});
 		setOtherEditor(type,"one");
 	});
 	/***绑定变量新增事件***/
@@ -70,6 +66,7 @@ function initTabOne(){
 			$("#mode_one #varValue").focus();
 			return;
 		}
+		_hmt.push(['_trackEvent', "新增变量", "新增"]);
 		var var_tag = $("#mode_one #covert_type").attr("ct_type") == "scss" ? "$" : "@";
 		var var_one = var_tag + name +":"+value+";"
 		$("#mode_one #vars").append("<li var_one='"+var_one+"'><span>"+var_one+"</span><em>x<em></li>").show();
@@ -88,11 +85,13 @@ function initTabOne(){
 	/***绑定转换事件***/
 	$("#mode_one #do_convert").unbind("click");
 	$("#mode_one #do_convert").bind("click",function(){
+		_hmt.push(['_trackEvent', "tab1转换", "点击"]);
 		parseInput();
 	});
 	/**绑定演示代码按钮点击事件**/
 	$("#mode_one #cssDemo").unbind("click");
 	$("#mode_one #cssDemo").bind("click",function(){
+		_hmt.push(['_trackEvent', "tab1演示代码", "点击"]);
 		one_css_editor.setValue($("#cssDemoCode").html());
 		one_css_editor.gotoLine(1);
 	});
@@ -110,69 +109,72 @@ function initTabTwo(){
 	//绑定转换类型选择按钮点击事件
 	$("#mode_two li .ckBox input").unbind("click");
 	$("#mode_two li .ckBox input").bind("click",function(){
+		var type =$(this).attr("id").substring(0,$(this).attr("id").indexOf("_check"));
+		_hmt.push(['_trackEvent', "tab2类型选择", type]);
 		if($(this).is(":checked")){
 			$(this).parent().siblings().find("input").prop("checked",false);
 		}else{//取消选中
 			$(this).prop("checked",true);
 		}
-		$("#mode_two #other_covert_type").attr("ct_type",$(this).attr("id").substring(0,$(this).attr("id").indexOf("_check")));
-		var type = "";
-		$("#mode_two li .ckBox input").each(function(){
-			if($(this).is(":checked")) {
-			    type = $(this).attr("id").substring(0,$(this).attr("id").indexOf("_check"));
-			}
-		});
+		$("#mode_two #other_covert_type").attr("ct_type",type);
 		setOtherEditor(type,"two");
 	});
 	/***绑定转换事件***/
 	$("#mode_two #two_convert").unbind("click");
 	$("#mode_two #two_convert").bind("click",function(){
-		$.ajax({
-		url: "/api/convert", 
-		type: "post",
-		dataType: "json",
-		data: {
-			"code": two_other_editor.getValue(),
-			"type": $("#mode_two #other_covert_type").attr("ct_type") == "scss" ? "0" : "1"
-		}, 
-		success: function(res){
-			if(res.error_no == 0){
-				var result = res.result;
-				if(result.status == "0"){
-					two_css_editor.setValue(result.code);
-					two_css_editor.gotoLine(1);
+		var that = $(this);
+		if(!that.hasClass("dis")){
+			that.addClass("dis").html("转换中...");
+			_hmt.push(['_trackEvent', "tab2转换", "点击"]);
+			$.ajax({
+				url: "/api/convert", 
+				type: "post",
+				dataType: "json",
+				data: {
+					"code": two_other_editor.getValue(),
+					"type": $("#mode_two #other_covert_type").attr("ct_type") == "scss" ? "0" : "1"
+				},
+				success: function(res){
+					that.removeClass("dis").html("转换");
+					if(res.error_no == 0){
+						_hmt.push(['_trackEvent', "tab2转换", "成功"]);
+						var result = res.result;
+						if(result.status == "0"){
+							two_css_editor.setValue(result.code);
+							two_css_editor.gotoLine(1);
+						}
+					}else{
+						_hmt.push(['_trackEvent', "tab2转换", "失败"]);
+						errorMsg("转换失败，请检查代码格式",2000);
+					}
 				}
-			}else{
-				errorMsg("转换失败，请检查代码格式",2000);
-			}
+			});
 		}
-	});
 	});
 	/**绑定演示代码按钮点击事件**/
 	$("#mode_two #otherDemo").unbind("click");
 	$("#mode_two #otherDemo").bind("click",function(){
+		_hmt.push(['_trackEvent', "tab2演示代码", "点击"]);
 		two_other_editor.setValue($("#"+$("#mode_two #other_covert_type").attr("ct_type")+"DemoCode").html().replace(/&amp;/g, '&'));
 		two_other_editor.gotoLine(1);
 	});
 }
 
-/**初始化批量scss/less->css**/
+/**
+ * 初始化批量scss/less->css
+ **/
 function initTabThree(){
 	//绑定转换类型选择按钮点击事件
 	$("#mode_three .ckBox input").unbind("click");
 	$("#mode_three .ckBox input").bind("click",function(){
+		var type = $(this).attr("id").substring(0,$(this).attr("id").indexOf("_file"));
+		_hmt.push(['_trackEvent', "tab3类型选择", type]);
 		if($(this).is(":checked")){
 			$(this).parent().siblings("div").find("input").prop("checked",false);
 		}else{//取消选中
 			$(this).prop("checked",true);
 		}
-		$("#mode_three #three_covert_type").attr("ct_type",$(this).attr("id").substring(0,$(this).attr("id").indexOf("_file")));
-		var type = "";
-		$("#mode_three .ckBox input").each(function(){
-			if($(this).is(":checked")) {
-			    type = $(this).attr("id").substring(0,$(this).attr("id").indexOf("_file"));
-			}
-		});
+		$("#mode_three #three_covert_type").attr("ct_type",type);
 	});
 	//绑定选择文件事件
 	$("#mode_three #upload_file").off("change");
@@ -194,6 +196,7 @@ function initTabThree(){
 	$("#mode_three #file_convert").bind("click",function(){
 		var that = $(this);
 		if(!that.hasClass("dis")){
+			_hmt.push(['_trackEvent', "tab3转换", "点击"]);
 			if($("#download").length>0){
 				$("#download").remove();
 			}
@@ -215,6 +218,7 @@ function initTabThree(){
 				contentType : false,
 				success : function(res) { 
 					if(res.error_no == 0){
+						_hmt.push(['_trackEvent', "tab3转换", "成功"]);
 						var url = res.result.url;
 						that.removeClass("dis").html("开始转换");
 						window.open(url);
@@ -222,6 +226,7 @@ function initTabThree(){
 							'<a style="color: blue;font-style: italic;cursor: pointer;" href="' + url + '">点击此处</a> 重新下载</p>';
 						$(".upload_area .file_info").append(downHtml);
 					}else{
+						_hmt.push(['_trackEvent', "tab3转换", "失败"]);
 						errorMsg(res.error_info,2000);
 						that.removeClass("dis").html("开始转换");
 					}
@@ -502,6 +507,3 @@ function getIndent() {
 	return s;
 }
 /***********css转换js结束*********/
-
-
-

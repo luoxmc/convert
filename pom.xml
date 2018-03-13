@@ -112,20 +112,6 @@
                    <include>**/*.xml</include>
                </includes>
            </resource>
-           <resource>
-               <filtering>true</filtering>
-               <directory>src/main/resources/</directory>
-               <excludes>
-                   <exclude>*.dat</exclude>
-               </excludes>
-           </resource>
-           <resource>
-               <filtering>false</filtering>
-               <directory>src/main/resources/</directory>
-               <includes>
-                   <include>*.dat</include>
-               </includes>
-           </resource>
        </resources>
 
    </build>

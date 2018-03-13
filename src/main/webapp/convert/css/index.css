@@ -249,6 +249,10 @@ footer p a{
 .content .two_convert:active{
 	background:#757474;
 }
+.content .two_convert.dis{
+	color: #a09f9f !important;
+    background: #d2d0d0 !important;
+}
 .error_tip{
 	position: fixed;
     top: 55px;
