@@ -11,6 +11,7 @@ public class Comment {
 	    @Column(name = "ID")
 	    @GeneratedValue(strategy = GenerationType.AUTO)
 	    private Long id;
+		
 	    @Column(name = "NAME")
 	    private String name;
 
@@ -30,7 +31,7 @@ public class Comment {
 	    private int replyId;
 	    
 	    @Column(name = "REPLY_NAME")
-	    private int replyName;
+	    private String replyName;
 	    
 	    @Column(name = "CREATE_DATE")
 	    private Date createDate;
@@ -92,11 +93,11 @@ public class Comment {
 			this.replyId = replyId;
 		}
 
-		public int getReplyName() {
+		public String getReplyName() {
 			return replyName;
 		}
 
-		public void setReplyName(int replyName) {
+		public void setReplyName(String replyName) {
 			this.replyName = replyName;
 		}
 
