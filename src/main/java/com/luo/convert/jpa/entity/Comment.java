@@ -77,7 +77,7 @@ public class Comment {
 			this.type = type;
 		}
 
-		public int getJoinId() {
+		public Integer getJoinId() {
 			return joinId;
 		}
 

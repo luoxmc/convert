@@ -36,6 +36,9 @@ public class CommentService {
 				name = adress + "网友";
 			}
 		}
+		if(StringUtils.isEmpty(name)){
+			name="匿名";
+		}
 		Comment comment = new Comment();
 		comment.setName(name);
 		comment.setEmail(email);
