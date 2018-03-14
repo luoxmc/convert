@@ -11,18 +11,6 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>
 	        /WEB-INF/root-context.xml,
-	        classpath*:spring-beans-sdk.xml,
-			classpath*:spring-beans-system.xml,
-			classpath*:spring-beans-arch.xml,
-			classpath*:spring-beans-acpt.xml,
-			classpath*:spring-beans-preengage.xml,
-			classpath*:spring-beans-account.xml,
-			classpath*:spring-beans-elig.xml,
-			classpath*:spring-beans-cert.xml,
-			classpath*:spring-beans-bankacct.xml,
-			classpath*:spring-beans-csdc.xml,
-			classpath*:spring-beans-ofsecu.xml,
-			classpath*:spring-beans-prod.xml,
 	        classpath*:spring-*.xml
         </param-value>
     </context-param>

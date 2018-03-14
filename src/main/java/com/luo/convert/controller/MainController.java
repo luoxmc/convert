@@ -13,7 +13,7 @@ import com.luo.convert.base.response.JsonResponse;
 import com.luo.convert.controller.service.MainService;
 
 @Controller
-@RequestMapping("/api")
+@RequestMapping("/api/main")
 public class MainController {
 	private static Logger log = Logger.getLogger(MainController.class);
 	

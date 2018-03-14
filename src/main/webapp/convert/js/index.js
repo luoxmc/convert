@@ -127,7 +127,7 @@ function initTabTwo(){
 			that.addClass("dis").html("转换中...");
 			_hmt.push(['_trackEvent', "tab2转换", "点击"]);
 			$.ajax({
-				url: "/api/convert", 
+				url: "/api/main/convert", 
 				type: "post",
 				dataType: "json",
 				data: {
@@ -211,7 +211,7 @@ function initTabThree(){
 			formData.append("file", file);
 			formData.append("type", $("#mode_three #three_covert_type").attr("ct_type"));
 			$.ajax({
-				url : "/api/file", 
+				url : "/api/main/file", 
 				type : 'POST', 
 				data : formData, 
 				processData : false, 
