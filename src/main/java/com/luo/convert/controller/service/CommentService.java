@@ -27,7 +27,7 @@ public class CommentService {
 	 * @param email
 	 * @param content
 	 */
-	public Map<String,String> addComment(HttpServletRequest request,String name,String email,String content,int joinId,int replyId,String replyName,int type){
+	public Map<String,String> addComment(HttpServletRequest request,String name,String email,String content,Integer joinId,Integer replyId,String replyName,Integer type){
 		log.info("test......");
 		if(StringUtils.isEmpty(name)){//姓名为空查询客户地址当作姓名
 			String ip = this.getClientIpAddr(request);
