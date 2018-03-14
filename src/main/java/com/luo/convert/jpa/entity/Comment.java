@@ -25,10 +25,10 @@ public class Comment {
 	    private Integer type;
 
 	    @Column(name = "JOIN_ID")
-	    private int joinId;
+	    private Integer joinId;
 	    
 	    @Column(name = "REPLY_ID")
-	    private int replyId;
+	    private Integer replyId;
 	    
 	    @Column(name = "REPLY_NAME")
 	    private String replyName;
@@ -69,11 +69,11 @@ public class Comment {
 			this.content = content;
 		}
 
-		public int getType() {
+		public Integer getType() {
 			return type;
 		}
 
-		public void setType(int type) {
+		public void setType(Integer type) {
 			this.type = type;
 		}
 
@@ -81,15 +81,15 @@ public class Comment {
 			return joinId;
 		}
 
-		public void setJoinId(int joinId) {
+		public void setJoinId(Integer joinId) {
 			this.joinId = joinId;
 		}
 
-		public int getReplyId() {
+		public Integer getReplyId() {
 			return replyId;
 		}
 
-		public void setReplyId(int replyId) {
+		public void setReplyId(Integer replyId) {
 			this.replyId = replyId;
 		}
 
