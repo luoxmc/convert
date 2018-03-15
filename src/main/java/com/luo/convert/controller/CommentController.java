@@ -1,8 +1,6 @@
 package com.luo.convert.controller;
 
-import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +33,8 @@ public class CommentController {
 	@RequestMapping("/queryPage")
 	@ResponseBody
     public JsonResponse doQuery(@RequestParam("page_num") int page){
-		List<Map<String,String>> list = service.queryPage(page);
-		return JsonResponse.success().addData(list);
+		Map<String,Object> result = service.queryPage(page);
+		return JsonResponse.success().add("result", result);
     }
 	
 }

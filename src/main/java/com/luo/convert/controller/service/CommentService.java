@@ -59,21 +59,35 @@ public class CommentService {
 	 * @param num 页数
 	 * @return
 	 */
-	public List<Map<String,String>> queryPage(int num){
+	public Map<String,Object> queryPage(int num){
 		int count = this.commentRepository.findCountByType(1);//总条数
 		int countPage = count/5 + (count%5)>0 ? 1:0 ;
 		if( countPage < num ){
 			throw new RuntimeException("当前页无数据");
 		}
 		int start = num*5 - 5;
-		int end = num*5;
-		List<Comment> list = this.commentRepository.findByPage(start, end);
-		List<Map<String,String>> result = new ArrayList<Map<String,String>>();
-		for (int i = 0; i < list.size(); i++) {
-			Comment bean =list.get(i);
+		List<Comment> comments = this.commentRepository.findByPage(start);
+		Integer[] ids = new Integer[5];
+		List<Map<String,String>> comments_parse = new ArrayList<Map<String,String>>();
+		for (int i = 0; i < comments.size(); i++) {
+			Comment bean =comments.get(i);
+			ids[i] = bean.getId();
 			Map<String,String> map = this.parseComment(bean);
-			result.add(map);
+			comments_parse.add(map);
 		}
+		List<Comment> jions = this.commentRepository.findByJoinIds(ids);
+		List<Map<String,String>> joins_parse = new ArrayList<Map<String,String>>();
+		if(jions.size()>0){
+			for (int i = 0; i < jions.size(); i++) {
+				Comment bean =jions.get(i);
+				Map<String,String> map = this.parseComment(bean);
+				joins_parse.add(map);
+			}
+		}
+		Map<String,Object> result = new HashMap<String,Object>();
+		result.put("total_page", countPage);
+		result.put("comments", comments_parse);
+		result.put("joins", joins_parse);
 		return result;
 	}
 	
@@ -134,6 +148,7 @@ public class CommentService {
 		Date date = bean.getCreateDate();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String now = sdf.format(date);
+		result.put("id", String.valueOf(bean.getId()));
 		result.put("name", bean.getName());
 		result.put("email", StringUtils.isEmpty(bean.getEmail()) ? "":bean.getEmail());
 		result.put("content", bean.getContent());

@@ -15,6 +15,9 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
 	int findCountByType(int type);
 	
 	//分页查询
-	@Query(value="SELECT t.* FROM t_comment t WHERE t.type=1 ORDER BY t.create_date DESC LIMIT ?1,?2",nativeQuery=true)
-	List<Comment> findByPage(int start,int end);
+	@Query(value="SELECT t.* FROM t_comment t WHERE t.type=1 ORDER BY t.create_date DESC LIMIT ?1,5",nativeQuery=true)
+	List<Comment> findByPage(int num);
+	
+	@Query(value="SELECT t.* FROM t_comment t WHERE t.TYPE=2 AND t.JOIN_ID IN ?1",nativeQuery=true)
+	List<Comment> findByJoinIds(Integer[] joinId);
 }
