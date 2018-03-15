@@ -137,10 +137,10 @@ public class CommentService {
 		result.put("name", bean.getName());
 		result.put("email", StringUtils.isEmpty(bean.getEmail()) ? "":bean.getEmail());
 		result.put("content", bean.getContent());
-		result.put("join_id", bean.getJoinId() == 0 ? "" : String.valueOf(bean.getJoinId()));
-		result.put("reply_id", bean.getReplyId() == 0 ? "" : String.valueOf(bean.getReplyId()));
+		result.put("join_id", bean.getJoinId() == null ? "" : String.valueOf(bean.getJoinId()));
+		result.put("reply_id", bean.getReplyId() == null ? "" : String.valueOf(bean.getReplyId()));
 		result.put("reply_name", StringUtils.isEmpty(bean.getReplyName()) ? "" : bean.getReplyName());
-		result.put("type", bean.getType() == 0 ? "":String.valueOf(bean.getType()));
+		result.put("type", bean.getType() == null ? "":String.valueOf(bean.getType()));
 		result.put("create_date", now);
 		return result;
 	}
