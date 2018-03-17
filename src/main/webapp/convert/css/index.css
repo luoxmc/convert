@@ -22,12 +22,12 @@ header .head_nav{
 	margin: 0 auto;
     width: 680px;
     color: #cacaca;
-    padding: 17px 0;
+    padding: 15px 0;
     height: 50px;
 }
 header .head_nav li {
     display: inline-block;
-    line-height: 16px;
+    line-height: 20px;
     padding: 0 12px;
     border-right: 3px solid #fff;
     font-weight: bold;
@@ -105,17 +105,16 @@ footer p a{
 }
 .content .opreator_area{
 	height: 80px;
-    padding: 0 30px;
-    margin-top: 10px;
+    padding: 0 60px;
+    margin-top: 20px;
 }
 .content .opreator_area .variable_area{
 	display: inline-block;
-    width: 200px;
+    width: 25%;
     height: 80px;
     border: 1px dashed #cacaca;
     overflow-y: auto;
     box-sizing: border-box;
-    margin-right: 20px;
 }
 .content .opreator_area .variable_area ul{
 	padding: 3px;
@@ -139,10 +138,11 @@ footer p a{
 }
 .content .opreator_area .variable_area ul li span{
 	display: inline-block;
-    width: 160px;
+    width: 78%;
     overflow: hidden;
     text-overflow: ellipsis;
     height: 20px;
+    text-indent: 10px;
 }
 .content .opreator_area .variable_area .no_var_tip{
 	display: inline-block;
@@ -154,21 +154,22 @@ footer p a{
 }
 .content .opreator_area .var_add{
 	display: inline-block;
-    width: 300px;
+    width: 25%;
     height: 80px;
     vertical-align: top;
     border: 1px solid #cacaca;
     box-sizing: border-box;
-    margin-right: 20px;
+    padding-right: 40px;
+    position: relative;
 }
 .content .opreator_area .var_add .addfirst{
 	display: inline-block;
-    width: 260px;
+    width: 100%;
     height: 78px;
 }
 .content .opreator_area .var_add .addlast{
 	display: inline-block;
-    width: 38px;
+    width: 40px;
     height: 78px;
     vertical-align: top;
     text-align: center;
@@ -178,6 +179,8 @@ footer p a{
     background: #929090;
     color: #ffffff;
     cursor: pointer;
+    position: absolute;
+    right: 0;
 }
 .content .opreator_area .var_add .addlast:active{
 	background:#757474;
@@ -302,6 +305,12 @@ footer p a{
 .content .upload_area .tips{
 	margin-bottom: 20px;
     color: #666666;
+    line-height: 35px;
+    font-size: 18px;
+}
+.content .upload_area .tips b{
+	font-weight: bold;
+	color: #da4613;
 }
 .upload_area .upload_a{
     padding: 0 10px;
@@ -321,6 +330,20 @@ footer p a{
     opacity: 0;
     height: 32px;
     width: 100%;
+}
+#mode_three{
+	padding: 20px 60px;
+}
+@media (max-width: 768px){
+	.content .opreator_area{
+	    padding: 0 40px;
+	}
+	#mode_three{
+		padding: 20px 40px;
+	}
+	.content .editorl {
+	    height: 450px;
+	}
 }
 
 /* start 复选框 */

@@ -1,5 +1,5 @@
 .comment{
-	padding: 30px 50px;
+	padding: 30px 60px;
 }
 .comment .comment_head{
 	 line-height: 35px;
@@ -74,17 +74,6 @@
     min-height: 1px;
     padding-right: 15px;
     padding-left: 15px;
-}
-@media (min-width: 768px){
-	.col-md-6 {
-	    -webkit-box-flex: 0;
-	    -ms-flex: 0 0 50%;
-	    flex: 0 0 50%;
-	    max-width: 50%;
-	}
-	.mt-md-0, .my-md-0 {
-	    margin-top: 0 !important;
-	}
 }
 
 .comment_add .title {
@@ -226,4 +215,20 @@
 .comment_add  .comment-textarea .text-bar .open {
 	visibility: visible;
 	transform: none;
+}
+@media (min-width: 768px){
+	.col-md-6 {
+	    -webkit-box-flex: 0;
+	    -ms-flex: 0 0 50%;
+	    flex: 0 0 50%;
+	    max-width: 50%;
+	}
+	.mt-md-0, .my-md-0 {
+	    margin-top: 0 !important;
+	}
+}
+@media (max-width: 768px){
+	.comment{
+		padding: 30px 40px;
+	}
 }
