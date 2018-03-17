@@ -27,8 +27,8 @@ public class CommentService {
 	 * @param email
 	 * @param content
 	 */
-	public Map<String,String> addComment(HttpServletRequest request,String name,String email,String content,Integer joinId,Integer replyId,String replyName,Integer type){
-		log.info("test......");
+	public Map<String,String> addComment(HttpServletRequest request,String name,String email,String content,Integer joinId,Integer replyId,String replyName,Integer type,Integer articleId){
+		log.info("add......");
 		if(StringUtils.isEmpty(name)){//姓名为空查询客户地址当作姓名
 			String ip = this.getClientIpAddr(request);
 			String adress = this.getAdressByIp(ip);
@@ -48,6 +48,7 @@ public class CommentService {
 		comment.setReplyName(replyName);
 		comment.setCreateDate(new Date());
 		comment.setType(type);
+		comment.setArticleId(articleId);
 		Comment bean = commentRepository.save(comment);
 		Map<String,String> result = this.parseComment(bean);
 		return result;
@@ -57,16 +58,17 @@ public class CommentService {
 	/**
 	 * 分页查询 
 	 * @param num 页数
+	 * @param articleId 文章id
 	 * @return
 	 */
-	public Map<String,Object> queryPage(int num){
+	public Map<String,Object> queryPage(int num,Integer articleId){
 		int count = this.commentRepository.findCountByType(1);//总条数
-		int countPage = count/5 + (count%5)>0 ? 1:0 ;
+		int countPage = count/5 + ((count%5)>0 ? 1:0 );
 		if( countPage < num ){
 			throw new RuntimeException("当前页无数据");
 		}
 		int start = num*5 - 5;
-		List<Comment> comments = this.commentRepository.findByPage(start);
+		List<Comment> comments = this.commentRepository.findByPage(articleId,start);
 		Integer[] ids = new Integer[5];
 		List<Map<String,String>> comments_parse = new ArrayList<Map<String,String>>();
 		for (int i = 0; i < comments.size(); i++) {
@@ -75,7 +77,7 @@ public class CommentService {
 			Map<String,String> map = this.parseComment(bean);
 			comments_parse.add(map);
 		}
-		List<Comment> jions = this.commentRepository.findByJoinIds(ids);
+		List<Comment> jions = this.commentRepository.findByJoinIds(articleId,ids);
 		List<Map<String,String>> joins_parse = new ArrayList<Map<String,String>>();
 		if(jions.size()>0){
 			for (int i = 0; i < jions.size(); i++) {
@@ -157,6 +159,7 @@ public class CommentService {
 		result.put("reply_name", StringUtils.isEmpty(bean.getReplyName()) ? "" : bean.getReplyName());
 		result.put("type", bean.getType() == null ? "":String.valueOf(bean.getType()));
 		result.put("create_date", now);
+		result.put("article_id", String.valueOf(bean.getArticleId()));
 		return result;
 	}
 	

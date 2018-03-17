@@ -6,6 +6,7 @@
 <title>SASS/LESS/CSS在线转换</title>
 <link href="../css/common.css" rel="stylesheet">
 <link href="../css/index.css" rel="stylesheet">
+<link href="../css/comment.css" rel="stylesheet">
 <script type="text/javascript" src="../plugins/jquery-3.3.1.min.js"></script>
 <script  type="text/javascript" src="../plugins/baidu.js"></script>
 <script  type="text/javascript" src="../plugins/ace/ace.js"></script>
@@ -87,7 +88,7 @@
 			</ul>
 			<div class="two_convert" id="two_convert">转换</div>
 		</div>
-		<div id="mode_three" style="display:none;">
+		<div id="mode_three" style="display:none;padding: 20px 50px;">
 			<div class="upload_area">
 				<p class="tips"><b style="font-weight: bold;color: #da4613;">请选择需转换文件类型，</b>并将需转换的文件放入同一个文件夹,压缩成.rar或者.zip格式后上传(保持文件夹和压缩包名称一致，如:abc和abc.zip)</p>
 				<div id="three_covert_type" ct_type="scss">
@@ -109,6 +110,36 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	
+	<div class="comment">
+		<h3 class="comment_head">评论<span><em id="totalPage">0</em>条评论</span></h3>
+		<ul class="comment_list">
+			暂无评论
+			<li></li>
+			<li></li>
+		</ul>
+		<div class="comment_add">
+			<div class="comment-from"> 
+				<div class="comment-info mb-3 row"> 
+					<div class="col-md-6 comment-form-author">
+						<input class="form-control" id="comment_name" placeholder="昵称" name="author" type="text" value=""> 
+					</div>
+					<div class="col-md-6 mt-3 mt-md-0 comment-form-email"> 
+						<input id="comment_email" class="form-control" name="email" placeholder="邮箱" type="email" value="" > 
+					</div> 
+				</div> 
+				<div class="comment-textarea"> 
+					<textarea class="form-control" id="comment_content" name="comment" ></textarea> 
+					<div class="text-bar clearfix"> 
+						<div class="float-right"> 
+							<a  id="submit" class="btn btn-primary" >发表评论</a> 
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	</div>
 	
 	<footer>

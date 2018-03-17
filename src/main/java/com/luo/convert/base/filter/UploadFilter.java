@@ -58,7 +58,7 @@ public class UploadFilter extends OncePerRequestFilter implements Filter {
                         Date date = new Date();
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
                         String today = sdf.format(date);
-                        String filePath = uploadPath + File.separator + today + File.separator + String.valueOf(new Random().nextInt(900000)+100000) + File.separator;
+                        String filePath = uploadPath  + today + File.separator + String.valueOf(new Random().nextInt(900000)+100000) + File.separator;
                         File path = new File(filePath);
                         if(!path.exists()){
                         	path.mkdirs();

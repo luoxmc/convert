@@ -36,6 +36,9 @@ public class Comment {
 	    @Column(name = "CREATE_DATE")
 	    private Date createDate;
 	    
+	    @Column(name = "ARTICLE_ID")
+	    private Integer articleId;
+	    
 	    
 		public Integer getId() {
 			return id;
@@ -107,6 +110,14 @@ public class Comment {
 
 		public void setCreateDate(Date createDate) {
 			this.createDate = createDate;
+		}
+
+		public Integer getArticleId() {
+			return articleId;
+		}
+
+		public void setArticleId(Integer articleId) {
+			this.articleId = articleId;
 		}
 	    
 }
