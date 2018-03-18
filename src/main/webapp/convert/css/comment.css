@@ -1,5 +1,5 @@
 .comment{
-	padding: 30px 60px;
+	padding: 30px 150px;
 }
 .comment .comment_head{
 	 line-height: 35px;
@@ -232,3 +232,47 @@
 		padding: 30px 40px;
 	}
 }
+.comment .comment_list li{
+    margin: 0.5rem 0;
+}
+.comment .comment_list li .name_title{
+	margin-bottom: 0.2rem;
+}
+.comment .comment_list li .name_title span{
+	color: #000;
+    font-weight: bold;
+    margin-right: 0.5rem;
+}
+.comment .comment_list li .name_title em{
+	font-size: 13px;
+    color: #999999;
+}
+.comment .comment_list li .c_content{
+	color: #4a4a4a;
+	line-height: 1.8rem;
+	text-indent: 0.2rem;
+	position: relative;
+}
+.comment .comment_list li .reply{
+	position: absolute;
+    right: 10px;
+    bottom: 0;
+    width: 50px;
+    text-align: center;
+    font-style: italic;
+    color: #7f7e7e;
+    font-size: 14px;
+    cursor: pointer;
+}
+.comment .comment_list li .rep_comment{
+	margin-left: 0.8rem;
+    background: #f9f7f7;
+    text-indent: 0.5rem;
+    margin-top: 0.2rem;
+}
+.comment .comment_list li .rep_comment .c_content{
+	text-indent: 0.7rem;
+}
+
+
+

@@ -7,6 +7,7 @@ var two_css_editor = null;
 window.onload=function(){
 	bindCommonEvent();
 	initTabOne();
+	initComment();
 }
 
 /**绑定通用事件**/
@@ -234,6 +235,53 @@ function initTabThree(){
 			});
 		}
 	});
+}
+
+/**初始化评论**/
+function initComment(){
+	getComments(1,1);
+}
+//查询评论
+function getComments(page_num,article_id){
+	$.ajax({
+		url: "/api/comment/queryPage", 
+		type: "post",
+		dataType: "json",
+		data: {
+			"page_num": page_num,
+			"article_id": article_id
+		},
+		success: function(res){
+			if(res.error_no == 0){
+				var result = res.result;
+				var comments = result.comments;
+				var joins = result.joins;
+				var _html = buildCommentHtml(comments,joins);
+				$(".comment .comment_list").html(_html);
+			}else{
+				errorMsg(res.error_info,2000);
+			}
+		}
+	});
+}
+//生成评论html
+function buildCommentHtml(comments,joins){
+	var _html = "";
+	for (var i = 0; i < comments.length; i++) {
+		var comment = comments[i];
+		var li = '<li id="'+comment.id+'" name="'+comment.name+'"><div class="name_title"><span>'+comment.name+'</span><em>'+comment.create_date+'</em></div><div class="c_content">'+comment.content+'<div class="reply">回复</div></div>';
+		if(joins && joins.length>0){
+			for (var j = 0; j < joins.length; j++) {
+				var join = joins[j];
+				if(join.join_id == comment.id){
+					li += '<div class="rep_comment" id="'+join.id+'" name="'+join.name+'"><div class="name_title"><span>'+join.name+'</span><em>'+join.create_date+'</em></div><div class="c_content">'+join.content+'<div class="reply">回复</div></div></div>';
+				}
+			}
+		}
+		li += '</li>';
+		_html += li;
+	}
+	return _html;
 }
 
 /**
