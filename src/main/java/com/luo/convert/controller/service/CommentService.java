@@ -65,7 +65,16 @@ public class CommentService {
 		int count = this.commentRepository.findCountByType(1);//总条数
 		int countPage = count/5 + ((count%5)>0 ? 1:0 );
 		if( countPage < num ){
-			throw new RuntimeException("当前页无数据");
+			if(num == 1){
+				Map<String,Object> result = new HashMap<String,Object>();
+				result.put("total_page", 0);
+				result.put("total_num", 0);
+				result.put("comments", new ArrayList<Map<String,String>>());
+				result.put("joins", new ArrayList<Map<String,String>>());
+				return result;
+			}else{
+				throw new RuntimeException("当前页无数据");
+			}
 		}
 		int start = num*5 - 5;
 		List<Comment> comments = this.commentRepository.findByPage(articleId,start);

@@ -109,9 +109,8 @@ header .head_nav li.active{
     font-size: 80%;
     font-weight: 400;
 }
-
 .content{
-	padding-top: 10px;
+	padding-top: 1rem;
 }
 .content .editor_ul .top_span
 {
@@ -150,7 +149,14 @@ header .head_nav li.active{
 .content .editor_ul li{
 	display: inline-block;
 	width:50%;
-	padding: 0 30px;
+}
+.content .editor_ul li:first-child{
+	padding-left:30px;
+	padding-right:30px;
+}
+.content .editor_ul li:last-child{
+	padding-left:30px;
+	padding-right:30px;
 }
 .content .editorl{
 	width:100%;
@@ -160,14 +166,16 @@ header .head_nav li.active{
 	height: 80px;
     padding: 0 150px;
     margin-top: 20px;
+    text-align: center;
 }
 .content .opreator_area .variable_area{
 	display: inline-block;
-    width: 25%;
+    width: 21%;
     height: 80px;
     border: 1px dashed #cacaca;
     overflow-y: auto;
     box-sizing: border-box;
+    text-align: left;
 }
 .content .opreator_area .variable_area ul{
 	padding: 3px;
@@ -207,7 +215,7 @@ header .head_nav li.active{
 }
 .content .opreator_area .var_add{
 	display: inline-block;
-    width: 25%;
+    width: 29%;
     height: 80px;
     vertical-align: top;
     border: 1px solid #cacaca;
@@ -244,6 +252,7 @@ header .head_nav li.active{
     line-height: 39px;
     box-sizing: border-box;
     text-indent: 5px;
+    text-align: left;
 }
 .content .opreator_area .var_add .addfirst em:first-child{
 	border-bottom: 1px solid #cacaca;
@@ -258,57 +267,42 @@ header .head_nav li.active{
 }
 .content .opreator_area .do_area{
 	display: inline-block;
-    width: 250px;
+    width: 20%;
     height: 80px;
     vertical-align: top;
     text-align: left;
-    padding-top: 5px;
-    margin-left: 5px;
 }
 .content .opreator_area .do_area em:first-child{
 	display: inline-block;
     width: 100%;
     height: 25px;
+    padding: 26px 0;
 }
-.content .opreator_area .do_area em:last-child{
-	display: inline-block;
-    width: 160px;
-    line-height: 40px;
-    text-align: center;
-    font-size: 20px;
-    background: #929090;
-    border-radius: 3px;
-    margin: 5px 0;
-    cursor: pointer;
-}
-.content .opreator_area .do_area em:last-child a{
-	text-decoration: none;
-    color: #ffffff;
-    width: 100%;
-    height: 100%;
-    display: inline-block;
-}
-.content .opreator_area .do_area em:last-child a:active{
-	background:#757474;
-}
-.content .two_convert{
-	width: 15%;
-    margin: 10px auto;
-    margin-top: 20px;
+.convert_icon{
+	position: absolute;
+    top: 40%;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    margin-left: -25px;
     background: grey;
-    text-align: center;
-    line-height: 45px;
-    color: #ffffff;
-    border-radius: 7px;
+    border-radius: 25px;
+    background-image: url(../images/conv-arr.svg);
+    background-size: 30px 30px;
+    background-repeat: no-repeat;
+    background-position: center center;
     cursor: pointer;
-    font-size: 20px;
 }
-.content .two_convert:active{
-	background:#757474;
+#mode_two .convert_icon{
+	top: 45%;
 }
-.content .two_convert.dis{
-	color: #a09f9f !important;
-    background: #d2d0d0 !important;
+.convert_icon:hover{
+	width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    background-size: 33px 33px;
+    margin-left: -30px;
+    margin-top:-5px;
 }
 .error_tip{
 	position: fixed;
@@ -396,6 +390,71 @@ header .head_nav li.active{
 	}
 	.content .editorl {
 	    height: 450px;
+	}
+	.content .editor_ul li:first-child{
+		padding-left:10px;
+		padding-right:25px;
+	}
+	.content .editor_ul li:last-child{
+		padding-left:25px;
+		padding-right:10px;
+	}
+}
+@media (max-width: 1400px){
+	.content .opreator_area .variable_area{
+		width:30%;
+	}
+	.content .opreator_area .var_add{
+		width:37%;
+	}
+}
+
+@media (min-width: 1400px){
+	.content .opreator_area{
+	    padding: 0 160px;
+	}
+	#mode_three{
+		padding: 20px 200px;
+	}
+	.content .editor_ul li:first-child{
+		padding-left:35px;
+		padding-right:30px;
+	}
+	.content .editor_ul li:last-child{
+		padding-left:30px;
+		padding-right:35px;
+	}
+}
+@media (min-width: 1950px){
+	.content .opreator_area{
+	    padding: 0 250px;
+	}
+	#mode_three{
+		padding: 20px 250px;
+	}
+	.content .editor_ul li:first-child{
+		padding-left:150px;
+		padding-right:40px;
+	}
+	.content .editor_ul li:last-child{
+		padding-left:40px;
+		padding-right:150px;
+	}
+}
+@media (min-width: 2570px){
+	.content .opreator_area{
+	    padding: 0 350px;
+	}
+	#mode_three{
+		padding: 20px 350px;
+	}
+	.content .editor_ul li:first-child{
+		padding-left:305px;
+		padding-right:65px;
+	}
+	.content .editor_ul li:last-child{
+		padding-left:65px;
+		padding-right:305px;
 	}
 }
 

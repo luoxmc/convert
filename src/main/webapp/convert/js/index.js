@@ -125,7 +125,7 @@ function initTabTwo(){
 	$("#mode_two #two_convert").bind("click",function(){
 		var that = $(this);
 		if(!that.hasClass("dis")){
-			that.addClass("dis").html("转换中...");
+			that.addClass("dis");
 			_hmt.push(['_trackEvent', "tab2转换", "点击"]);
 			$.ajax({
 				url: "/api/main/convert", 
@@ -136,7 +136,7 @@ function initTabTwo(){
 					"type": $("#mode_two #other_covert_type").attr("ct_type") == "scss" ? "0" : "1"
 				},
 				success: function(res){
-					that.removeClass("dis").html("转换");
+					that.removeClass("dis");
 					if(res.error_no == 0){
 						_hmt.push(['_trackEvent', "tab2转换", "成功"]);
 						var result = res.result;
@@ -262,6 +262,7 @@ function initComment(){
 			getComments(1);
 			$("#comment_name").val("");
 			$("#comment_email").val("");
+			$("#comment_content").val("");
 		});
 	});
 }
@@ -285,6 +286,9 @@ function getComments(article_id){
 				$("#total_num").html(result.total_num).attr("total_page",result.total_page);
 				$(".comment #load_more").html("加载更多");
 				if(comments.length > 0){
+					if($(".comment_list li").length <= 0){
+						$(".comment_list").html("");
+					}
 					var _html = buildCommentHtml(comments,joins);
 					$(".comment .comment_list").append(_html);
 					bindReplyEvent();
@@ -296,7 +300,7 @@ function getComments(article_id){
 					}
 				}else{
 					if(cur_page == 1){
-						$(".comment .comment_list").html("暂无数据");
+						$(".comment .comment_list").html("还没有评论，抢个沙发吧！");
 					}
 				}
 			}else{
@@ -332,8 +336,11 @@ function buildCommentHtml(comments,joins){
 function bindReplyEvent(){
 	$(".comment_list .reply").unbind("click");
 	$(".comment_list .reply").bind("click",function(){
+		if($("#reply_add").length>0){
+			$("#reply_add").remove();
+		}
 		var parent = $(this).parent().parent();
-		var _html = '<div class="comment_add"><div class="comment-from"><div class="comment-info mb-3 row"><div class="col-md-6 comment-form-author">'+
+		var _html = '<div class="comment_add" id="reply_add"><div class="comment-from"><div class="comment-info mb-3 row"><div class="col-md-6 comment-form-author">'+
 				'<input class="form-control" id="reply_name" placeholder="昵称" name="author" type="text" value=""></div><div class="col-md-6 mt-3 mt-md-0 comment-form-email">'+
 				'<input id="reply_email" class="form-control" name="email" placeholder="邮箱" type="email" value=""></div></div><div class="comment-textarea">'+
 				'<textarea class="form-control" id="reply_content" name="comment"></textarea><div class="text-bar clearfix"><div class="float-right">'+
@@ -388,6 +395,7 @@ function addComment(param,callback){
 		data: param,
 		success: function(res){
 			if(res.error_no == 0){
+				errorMsg("评论成功",1200,1);
 				if(callback){
 					callback(res.result);
 				}
@@ -423,8 +431,9 @@ function setOtherEditor(type,tab){
 }
 
 //错误信息提示
-function errorMsg(msg,time){
-	$("#error_msg").html(msg ? msg : "未知错误").show();
+function errorMsg(msg,time,type){
+	var color = (type == 1 ? "#98e875":"#ff7171");
+	$("#error_msg").html(msg ? msg : "未知错误").show().css("background",color);
 	setTimeout(function(){
 		$("#error_msg").html("").hide();
 	},time ? time : 2000);

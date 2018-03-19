@@ -20,7 +20,7 @@
     line-height: 25px;
 }
 .comment .comment_list{
-	padding: 0 1rem;
+	padding: 1rem 1rem;
     color: #666666;
 }
 
@@ -246,6 +246,21 @@
 @media (max-width: 768px){
 	.comment{
 		padding: 30px 40px;
+	}
+}
+@media (min-width: 1400px){
+	.comment{
+		padding: 30px 200px;
+	}
+}
+@media (min-width: 1950px){
+	.comment{
+		padding: 30px 250px;
+	}
+}
+@media (min-width: 2570px){
+	.comment{
+		padding: 30px 350px;
 	}
 }
 .comment .comment_list li{
