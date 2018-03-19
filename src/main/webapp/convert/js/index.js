@@ -256,6 +256,7 @@ function getComments(page_num,article_id){
 				var result = res.result;
 				var comments = result.comments;
 				var joins = result.joins;
+				$("#total_num").html(result.total_num);
 				var _html = buildCommentHtml(comments,joins);
 				$(".comment .comment_list").html(_html);
 			}else{

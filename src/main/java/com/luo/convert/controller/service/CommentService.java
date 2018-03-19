@@ -88,6 +88,7 @@ public class CommentService {
 		}
 		Map<String,Object> result = new HashMap<String,Object>();
 		result.put("total_page", countPage);
+		result.put("total_num", count);
 		result.put("comments", comments_parse);
 		result.put("joins", joins_parse);
 		return result;

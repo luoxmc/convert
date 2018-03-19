@@ -5,17 +5,17 @@ body{
 header{
 	width:100%;
 	height:50px;
-	background:#666666;
+	background-color: rgba(0,0,0,.85);
+    -webkit-box-shadow: 0 0 0.5rem -0.0625rem rgba(0,0,0,.6);
+    box-shadow: 0 0 0.5rem -0.0625rem rgba(0,0,0,.6);
 }
 header .main{
 	width: 180px;
     height: 100%;
-    padding-left: 50px;
+    padding-left: 3rem;
     font-size: 26px;
     color: #ffffff;
     line-height: 50px;
-    font-weight: bold;
-    font-style: italic;
     float: left;
 }
 header .head_nav{
@@ -28,10 +28,10 @@ header .head_nav{
 header .head_nav li {
     display: inline-block;
     line-height: 20px;
-    padding: 0 12px;
-    border-right: 3px solid #fff;
-    font-weight: bold;
+    padding: 0 1.2rem;
     cursor: pointer;
+    color: rgba(255,255,255,.5);
+    font-size: 15px;
 }
 header .head_nav li:last-child{
 	border:none;
@@ -42,21 +42,74 @@ header .head_nav li:hover{
 header .head_nav li.active{
 	color:#ffffff;
 }
-footer{
-	width: 100%;
-    height: 60px;
-    background: #666666;
-    margin-top: 30px;
-}
-footer p{
-	color: #ffffff;
+.footer {
+    padding: 1.7rem 0;
+    background-color: #2e3033;
     text-align: center;
-    line-height: 60px;
+    font-size: 16px;
 }
-footer p a{
-	color: #bbbcbf;
-    font-style: italic;
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto
 }
+@media (min-width: 576px) {
+    .container {
+        max-width:540px
+    }
+}
+@media (min-width: 768px) {
+    .container {
+        max-width:720px
+    }
+}
+@media (min-width: 992px) {
+    .container {
+        max-width:960px
+    }
+}
+@media (min-width: 1200px) {
+    .container {
+        max-width:1140px
+    }
+}
+.row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+.text-muted {
+    color: #6c757d;
+    text-align: center;
+}
+.footer .copyright, .footer .miitbeian a {
+    color: #bbb;
+    text-align: center;
+    width: 100%;
+}
+.footer .miitbeian{
+	margin-top: 0.5rem;
+}
+.mr-1, .mx-1 {
+    margin-right: 0.25rem!important;
+}
+.footer a {
+    color: #00a2ff;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
+.small, small {
+    font-size: 80%;
+    font-weight: 400;
+}
+
 .content{
 	padding-top: 10px;
 }
