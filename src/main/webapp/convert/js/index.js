@@ -239,16 +239,42 @@ function initTabThree(){
 
 /**初始化评论**/
 function initComment(){
-	getComments(1,1);
+	getComments(1);
+	//绑定加载更多评论
+	$(".comment #load_more").bind("click",function(){
+		$(this).html('<div class="loading-box"><div></div><div></div><div></div></div>');
+		getComments(1);
+	});
+	//绑定主评论区评论
+	$("#submit_comment").unbind("click");
+	$("#submit_comment").bind("click",function(){
+		if(!$("#comment_content").val().trim()){
+			$("#comment_content").focus();
+			return;
+		}
+		var param = {};
+		param.name = $("#comment_name").val().trim();
+		param.email = $("#comment_email").val().trim();
+		param.type = 1;
+		param.article_id = 1;
+		param.content = $("#comment_content").val().trim();
+		addComment(param,function(comment){
+			getComments(1);
+			$("#comment_name").val("");
+			$("#comment_email").val("");
+		});
+	});
 }
-//查询评论
-function getComments(page_num,article_id){
+//查询展示评论
+function getComments(article_id){
+	var cur_page = Number($(".comment .comment_load").attr("cur_page"));
+	cur_page++;
 	$.ajax({
 		url: "/api/comment/queryPage", 
 		type: "post",
 		dataType: "json",
 		data: {
-			"page_num": page_num,
+			"page_num": cur_page,
 			"article_id": article_id
 		},
 		success: function(res){
@@ -256,9 +282,23 @@ function getComments(page_num,article_id){
 				var result = res.result;
 				var comments = result.comments;
 				var joins = result.joins;
-				$("#total_num").html(result.total_num);
-				var _html = buildCommentHtml(comments,joins);
-				$(".comment .comment_list").html(_html);
+				$("#total_num").html(result.total_num).attr("total_page",result.total_page);
+				$(".comment #load_more").html("加载更多");
+				if(comments.length > 0){
+					var _html = buildCommentHtml(comments,joins);
+					$(".comment .comment_list").append(_html);
+					bindReplyEvent();
+					$(".comment .comment_load").attr("cur_page",cur_page);
+					if(cur_page == result.total_page){
+						$(".comment .comment_load").hide();
+					}else{
+						$(".comment .comment_load").show();
+					}
+				}else{
+					if(cur_page == 1){
+						$(".comment .comment_list").html("暂无数据");
+					}
+				}
 			}else{
 				errorMsg(res.error_info,2000);
 			}
@@ -270,12 +310,16 @@ function buildCommentHtml(comments,joins){
 	var _html = "";
 	for (var i = 0; i < comments.length; i++) {
 		var comment = comments[i];
-		var li = '<li id="'+comment.id+'" name="'+comment.name+'"><div class="name_title"><span>'+comment.name+'</span><em>'+comment.create_date+'</em></div><div class="c_content">'+comment.content+'<div class="reply">回复</div></div>';
+		var li = '<li id="'+comment.id+'" name="'+comment.name+'"><div class="name_title lh15">'+comment.name+'</div><div class="c_content lh15">'+comment.content+'</div><div class="c_time lh15">'+comment.create_date+'<div class="reply">回复</div></div>';
 		if(joins && joins.length>0){
 			for (var j = 0; j < joins.length; j++) {
 				var join = joins[j];
 				if(join.join_id == comment.id){
-					li += '<div class="rep_comment" id="'+join.id+'" name="'+join.name+'"><div class="name_title"><span>'+join.name+'</span><em>'+join.create_date+'</em></div><div class="c_content">'+join.content+'<div class="reply">回复</div></div></div>';
+					var aite = "";
+					if(join.reply_name){
+						aite = "@"+ join.reply_name + " ";
+					}
+					li += '<div class="rep_comment" id="'+join.id+'" name="'+join.name+'"><div class="name_title lh15">'+join.name+'</div><div class="c_content lh15">'+ aite +join.content+'</div><div class="c_time lh15">'+join.create_date+'<div class="reply">回复</div></div></div>';
 				}
 			}
 		}
@@ -284,6 +328,77 @@ function buildCommentHtml(comments,joins){
 	}
 	return _html;
 }
+//绑定回复按钮事件
+function bindReplyEvent(){
+	$(".comment_list .reply").unbind("click");
+	$(".comment_list .reply").bind("click",function(){
+		var parent = $(this).parent().parent();
+		var _html = '<div class="comment_add"><div class="comment-from"><div class="comment-info mb-3 row"><div class="col-md-6 comment-form-author">'+
+				'<input class="form-control" id="reply_name" placeholder="昵称" name="author" type="text" value=""></div><div class="col-md-6 mt-3 mt-md-0 comment-form-email">'+
+				'<input id="reply_email" class="form-control" name="email" placeholder="邮箱" type="email" value=""></div></div><div class="comment-textarea">'+
+				'<textarea class="form-control" id="reply_content" name="comment"></textarea><div class="text-bar clearfix"><div class="float-right">'+
+				'<a  id="reply_cancel"  class="reply_cancel">取消</a><a id="reply" class="btn btn-primary">回复</a></div></div></div></div></div>';
+		parent.append(_html);
+		$("#main_comment_add").hide();
+		//取消
+		$("#reply_cancel").unbind("click");
+		$("#reply_cancel").bind("click",function(){
+			parent.find(".comment_add").remove();
+			$("#main_comment_add").show();
+		});
+		//回复
+		$("#reply").unbind("click");
+		$("#reply").bind("click",function(){
+			if(!$("#reply_content").val().trim()){
+				$("#reply_content").focus();
+				return;
+			}
+			var param = {};
+			if(parent.hasClass("rep_comment")){
+				param.reply_name = parent.attr("name");
+				param.reply_id = parent.attr("id");
+				param.join_id = parent.parent().attr("id");
+			}else{
+				param.join_id = parent.attr("id");
+			}
+			param.name = $("#reply_name").val().trim();
+			param.email = $("#reply_email").val().trim();
+			param.type = 2;
+			param.article_id = 1;
+			param.content = $("#reply_content").val().trim();
+			addComment(param,function(result){
+				var aite = "";
+				if(result.reply_name){
+					aite = "@"+ result.reply_name + " ";
+				}
+				li = '<div class="rep_comment" id="'+result.id+'" name="'+result.name+'"><div class="name_title lh15">'+result.name+'</div><div class="c_content lh15">'+ aite +result.content+'</div><div class="c_time lh15">'+result.create_date+'<div class="reply">回复</div></div></div>';
+				$("#"+ param.join_id).append(li);
+				parent.find(".comment_add").remove();
+				$("#main_comment_add").show();
+			});
+		});
+	});
+}
+//调用新增评论接口
+function addComment(param,callback){
+	$.ajax({
+		url: "/api/comment/add", 
+		type: "post",
+		dataType: "json",
+		data: param,
+		success: function(res){
+			if(res.error_no == 0){
+				if(callback){
+					callback(res.result);
+				}
+			}else{
+				errorMsg(res.error_info,2000);
+			}
+		}
+	});
+}
+
+
 
 /**
  * 初始化另一个编辑器

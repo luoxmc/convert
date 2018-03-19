@@ -113,14 +113,14 @@
 	</div>
 	
 	<div class="comment">
-		<h3 class="comment_head">评论<span><em id="total_num">0</em>条评论</span></h3>
+		<h3 class="comment_head">评论<span><em id="total_num" total_page="">0</em>条评论</span></h3>
 		<ul class="comment_list">
-			暂无评论
+			
 		</ul>
-		<div>
-			<ul></ul>
+		<div class="comment_load" cur_page="0" style="display:none;">
+			<a id="load_more">加载更多</a>
 		</div>
-		<div class="comment_add">
+		<div class="comment_add" id="main_comment_add">
 			<div class="comment-from"> 
 				<div class="comment-info mb-3 row"> 
 					<div class="col-md-6 comment-form-author">
@@ -134,13 +134,12 @@
 					<textarea class="form-control" id="comment_content" name="comment" ></textarea> 
 					<div class="text-bar clearfix"> 
 						<div class="float-right"> 
-							<a  id="submit" class="btn btn-primary" >发表评论</a> 
+							<a  id="submit_comment" class="btn btn-primary" >发表评论</a> 
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 	
 	<footer class="footer">
