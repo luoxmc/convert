@@ -224,7 +224,7 @@ function initTabThree(){
 						that.removeClass("dis").html("开始转换");
 						window.open(url);
 						var downHtml = '<p id="download" style="margin-top: 15px;font-size: 14px;color: #5ca7a2;">转换成功，若未自动下载，请 ' +
-							'<a style="color: blue;font-style: italic;cursor: pointer;" href="' + url + '">点击此处</a> 重新下载</p>';
+							'<a style="color: #9f9fab;cursor: pointer;" href="' + url + '">点击此处</a> 重新下载</p>';
 						$(".upload_area .file_info").append(downHtml);
 					}else{
 						_hmt.push(['_trackEvent', "tab3转换", "失败"]);
@@ -239,11 +239,18 @@ function initTabThree(){
 
 /**初始化评论**/
 function initComment(){
+	bindDonateEvent();//绑定打赏相关事件
+	if(getCookie("comment_name")){
+		$("#comment_name").val(getCookie("comment_name"));
+	}
+	if(getCookie("comment_email")){
+		$("#comment_email").val(getCookie("comment_email"));
+	}
 	getComments(1);
 	//绑定加载更多评论
 	$(".comment #load_more").bind("click",function(){
 		$(this).html('<div class="loading-box"><div></div><div></div><div></div></div>');
-		getComments(1);
+		getComments(1,true);
 	});
 	//绑定主评论区评论
 	$("#submit_comment").unbind("click");
@@ -266,10 +273,12 @@ function initComment(){
 		});
 	});
 }
-//查询展示评论
-function getComments(article_id){
+//查询展示评论 flag加载更多标志
+function getComments(article_id,flag){
 	var cur_page = Number($(".comment .comment_load").attr("cur_page"));
-	cur_page++;
+	if(flag){
+		cur_page++;
+	}
 	$.ajax({
 		url: "/api/comment/queryPage", 
 		type: "post",
@@ -286,6 +295,9 @@ function getComments(article_id){
 				$("#total_num").html(result.total_num).attr("total_page",result.total_page);
 				$(".comment #load_more").html("加载更多");
 				if(comments.length > 0){
+					if(cur_page == 1){
+						$(".comment_list").html("");
+					}
 					if($(".comment_list li").length <= 0){
 						$(".comment_list").html("");
 					}
@@ -321,7 +333,7 @@ function buildCommentHtml(comments,joins){
 				if(join.join_id == comment.id){
 					var aite = "";
 					if(join.reply_name){
-						aite = "@"+ join.reply_name + " ";
+						aite = "<em>@"+ join.reply_name + "</em> ";
 					}
 					li += '<div class="rep_comment" id="'+join.id+'" name="'+join.name+'"><div class="name_title lh15">'+join.name+'</div><div class="c_content lh15">'+ aite +join.content+'</div><div class="c_time lh15">'+join.create_date+'<div class="reply">回复</div></div></div>';
 				}
@@ -346,6 +358,12 @@ function bindReplyEvent(){
 				'<textarea class="form-control" id="reply_content" name="comment"></textarea><div class="text-bar clearfix"><div class="float-right">'+
 				'<a  id="reply_cancel"  class="reply_cancel">取消</a><a id="reply" class="btn btn-primary">回复</a></div></div></div></div></div>';
 		parent.append(_html);
+		if(getCookie("comment_name")){
+			$("#reply_name").val(getCookie("comment_name"));
+		}
+		if(getCookie("comment_email")){
+			$("#reply_email").val(getCookie("comment_email"));
+		}
 		$("#main_comment_add").hide();
 		//取消
 		$("#reply_cancel").unbind("click");
@@ -376,7 +394,7 @@ function bindReplyEvent(){
 			addComment(param,function(result){
 				var aite = "";
 				if(result.reply_name){
-					aite = "@"+ result.reply_name + " ";
+					aite = "<em>@"+ result.reply_name + "</em> ";
 				}
 				li = '<div class="rep_comment" id="'+result.id+'" name="'+result.name+'"><div class="name_title lh15">'+result.name+'</div><div class="c_content lh15">'+ aite +result.content+'</div><div class="c_time lh15">'+result.create_date+'<div class="reply">回复</div></div></div>';
 				$("#"+ param.join_id).append(li);
@@ -388,6 +406,12 @@ function bindReplyEvent(){
 }
 //调用新增评论接口
 function addComment(param,callback){
+	if(param.name){
+		setCookie("comment_name",param.name);
+	}
+	if(param.email){
+		setCookie("comment_email",param.email);
+	}
 	$.ajax({
 		url: "/api/comment/add", 
 		type: "post",
@@ -405,7 +429,51 @@ function addComment(param,callback){
 		}
 	});
 }
+//打赏相关事件
+function bindDonateEvent(){
+	//点击打赏
+	$(".comment #show_pay").unbind("click").bind("click",function(){
+		$(".comment .reward_layer_shade").show();
+		$(".comment .reward_layer").show();
+	});
+	//切换支付方式
+	$(".comment .reward_layer .choose-pay input").unbind("click").bind("click",function(){
+		var id = $(this).attr("id");
+		$("#"+id+"_qr").show().siblings().hide();
+	});
+	//关闭打赏弹窗
+	$(".comment #layer_close").unbind("click").bind("click",function(){
+		$(".comment .reward_layer_shade").hide();
+		$(".comment .reward_layer").hide();
+	});
+}
 
+
+//设置cookie
+function setCookie(cname, cvalue, exdays) {
+	if(!exdays){
+		exdays = 100;
+	}
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires;
+}
+//获取cookie
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) != -1) return c.substring(name.length, c.length);
+    }
+    return "";
+}
+//清除cookie 
+function clearCookie(name) { 
+    setCookie(name, "", -1); 
+} 
 
 
 /**

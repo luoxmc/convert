@@ -253,17 +253,28 @@ header .head_nav li.active{
     box-sizing: border-box;
     text-indent: 5px;
     text-align: left;
+    position: relative;
+    padding-left: 60px;
+}
+.content .opreator_area .var_add .addfirst em span{
+	position: absolute;
+    font-size: 15px;
+    width: 60px;
+    line-height: 39px;
+    left: 0;
 }
 .content .opreator_area .var_add .addfirst em:first-child{
 	border-bottom: 1px solid #cacaca;
 }
 .content .opreator_area .var_add .addfirst em input{
-	border: none;
-    height: 28px;
-    width: 168px;
+	display: inline-block;
+    border: none;
+    width: 90%;
     font-size: 14px;
     text-indent: 5px;
     color: #333333;
+    line-height: 35px;
+    background: #f6f6f6;
 }
 .content .opreator_area .do_area{
 	display: inline-block;
@@ -425,7 +436,7 @@ header .head_nav li.active{
 		padding-right:35px;
 	}
 }
-@media (min-width: 1950px){
+@media (min-width: 1900px){
 	.content .opreator_area{
 	    padding: 0 250px;
 	}

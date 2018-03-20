@@ -18,6 +18,6 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
 	@Query(value="SELECT t.* FROM t_comment t WHERE t.type=1 AND t.article_id = ?1 ORDER BY t.create_date DESC LIMIT ?2,5",nativeQuery=true)
 	List<Comment> findByPage(Integer article_id,int num);
 	
-	@Query(value="SELECT t.* FROM t_comment t WHERE t.TYPE=2 AND t.article_id = ?1 AND t.JOIN_ID IN ?2",nativeQuery=true)
+	@Query(value="SELECT t.* FROM t_comment t WHERE t.TYPE=2 AND t.article_id = ?1 AND t.JOIN_ID IN ?2 ORDER BY t.create_date DESC",nativeQuery=true)
 	List<Comment> findByJoinIds(Integer article_id,Integer[] joinId);
 }

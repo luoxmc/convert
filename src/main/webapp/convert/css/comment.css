@@ -3,7 +3,7 @@
 }
 .comment .comment_head{
 	 line-height: 35px;
-    background: #efecec;
+    background: #27282217;
     border-radius: 5px;
     text-indent: 10px;
     font-weight: bold;
@@ -245,22 +245,22 @@
 }
 @media (max-width: 768px){
 	.comment{
-		padding: 30px 40px;
+		padding: 45px 40px;
 	}
 }
 @media (min-width: 1400px){
 	.comment{
-		padding: 30px 200px;
+		padding: 45px 200px;
 	}
 }
-@media (min-width: 1950px){
+@media (min-width: 1900px){
 	.comment{
-		padding: 30px 250px;
+		padding: 45px 250px;
 	}
 }
 @media (min-width: 2570px){
 	.comment{
-		padding: 30px 350px;
+		padding: 45px 350px;
 	}
 }
 .comment .comment_list li{
@@ -280,6 +280,9 @@
 .comment .comment_list li .c_content{
 	color: #4a4a4a;
     font-size: 15px;
+}
+.comment .comment_list li .c_content em{
+	color: #868679;
 }
 .comment .comment_list li .c_time{
 	color: #9B9B9B;
@@ -388,6 +391,153 @@
 	background-color: #fff;
 	-webkit-animation-fill-mode: both;
 	animation-fill-mode: both
+}
+
+.comment .reward{
+	width: 80%;
+    height: 5rem;
+    background: #ffffff;
+    padding-right: 12rem;
+    margin: 0 auto;
+    margin-bottom: 1.5rem;
+    border-radius: 0.5rem;
+    display: table;
+    position: relative;
+}
+.comment .reward .reward_tip{
+	width: 100%;
+    height: 5rem;
+    color: #969494;
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 2rem;
+    display: table-cell;
+    vertical-align: middle;
+    padding: 0 0.5rem;
+}
+.comment .reward .reward_btn{
+	position: absolute;
+    width: 12rem;
+    height: 5rem;
+    right: 0;
+    padding: 1.3rem 0 1.3rem 1rem;
+}
+.comment .reward .reward_btn a{
+	display: inline-block;
+    line-height: 2.4rem;
+    width: 5.5rem;
+    text-align: center;
+    border: .0625rem solid #495056;
+    border-radius: 0.185rem;
+    color: #495056;
+    cursor: pointer;
+}
+.comment .reward_layer_shade{
+	position: fixed;
+	z-index: 999;
+    background-color: rgb(0, 0, 0);
+    opacity: 0.3;
+	top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.comment .reward_layer{
+	position: fixed;
+    z-index: 1000;
+    width: 300px;
+    height: 370px;
+    top: 50%;
+    margin-top: -185px;
+    left: 50%;
+    margin-left: -150px;
+    background: #ffffff;
+}
+.comment .reward_layer .layui-layer-setwin{
+	position: absolute;
+    right: 15px;
+    top: 15px;
+    font-size: 0;
+    line-height: initial;
+}
+.comment .reward_layer .layui-layer-setwin .layui-layer-close{
+	position: relative;
+    width: 16px;
+    height: 16px;
+    margin-left: 10px;
+    font-size: 12px;
+    cursor: pointer;
+    background: url(../images/icon.png) no-repeat;
+    background-position: 1px -40px;
+    display: inline-block;
+    vertical-align: top;
+}
+.comment .reward_layer .layui-layer-title{
+	padding: 0 80px 0 20px;
+    height: 42px;
+    line-height: 42px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+    color: #333;
+    overflow: hidden;
+    background-color: #F8F8F8;
+    border-radius: 2px 2px 0 0;
+}
+.mb-2,.my-2 {
+    margin-bottom: .5rem!important
+}
+.donate-box .meta-pay {
+    margin-top: .875rem;
+    margin-bottom: .875rem;
+    text-align: center;
+}
+.donate-box .qr-pay{
+	text-align: center;
+}
+.donate-box .qr-pay img {
+    width: 12.5rem;
+    height: 12.5rem
+}
+.donate-box .choose-pay{
+	text-align: center;
+	margin-top: 0.5rem;
+}
+.donate-box .choose-pay input {
+    display: none
+}
+.donate-box .choose-pay input:checked+label {
+    border-color: #0092ee;
+    color: #0092ee
+}
+.donate-box .pay-button {
+	display: inline-block;
+    margin: .625rem .3125rem;
+    width: 8.25rem;
+    height: 2.8125rem;
+    border: .0625rem solid #e6e6e6;
+    border-radius: .125rem;
+    text-align: center;
+    line-height: 2.5rem;
+    cursor: pointer
+}
+.donate-box .pay-button img {
+    height: 1.6rem!important
+}
+@media (max-width: 1000px){
+	.comment .reward{
+		width: 90%;
+	    padding-right: 8rem;
+	    margin-bottom: 1.5rem;
+	    display: table;
+	}
+	.comment .reward .reward_tip{
+	    font-size: 1.1rem;
+	    line-height: 2rem;
+	    padding: 0 0.5rem;
+	}
+	.comment .reward .reward_btn{
+	    width: 8rem;
+	}
 }
 
 

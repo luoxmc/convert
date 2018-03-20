@@ -7,6 +7,7 @@ body{
 	-moz-user-select:moz-none;
 	user-select:auto;
 	font-family: Gotham-Book,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",Helvetica,Arial,"PingFang SC","Hiragino Sans GB","Microsoft Yahei UI","Microsoft Yahei","Source Han Sans CN",sans-serif;
+	background: #f6f6f6;
 }
 body * {
 	box-sizing:border-box;

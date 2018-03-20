@@ -50,8 +50,8 @@
 				<span class="variable_area"><ul id="vars" style="display: none;"></ul><em class="no_var_tip">暂未添加变量</em></span><span style="width:3%;display:inline-block;"></span>
 				<span class="var_add">
 					<span class="addfirst">
-						<em>变量名:&nbsp;<input type="text" placeholder="请输入变量名" id="varName"></input></em>
-						<em>变量值:&nbsp;<input type="text" placeholder="请输入变量值" id="varValue"></input></em>
+						<em><span>变量名:&nbsp;</span><input type="text" placeholder="请输入变量名" id="varName"></input></em>
+						<em><span>变量值:&nbsp;</span><input type="text" placeholder="请输入变量值" id="varValue"></input></em>
 					</span><span class="addlast" id="doAdd">+</span>
 				</span><span style="width:3%;display:inline-block;"></span><span class="do_area">
 					<em>
@@ -111,11 +111,37 @@
 	</div>
 	
 	<div class="comment">
+		<div class="reward">
+			<div class="reward_tip">本站提供CSS/SCSS/LESS在线相互转换，无需安装复杂的编译环境，简单便捷。</div>
+			<div class="reward_btn"><a id="show_pay">打赏</a></div>
+			<div class="reward_layer_shade" style="display:none;"></div>
+			<div class="reward_layer" style="display:none;">
+				<div class="layui-layer-title" style="cursor: move;">打赏作者</div>
+				<div class="donate-box">
+					<div class="meta-pay text-center my-2"><strong>扫一扫支付</strong></div>
+					<div class="qr-pay text-center">
+						<img class="pay-img" id="alipay_qr" src="../images/alipay-qr.png">
+						<img class="pay-img" style="display:none;" id="wechat_qr" src="../images/wechat-qr.png">
+					</div>
+					<div class="choose-pay text-center mt-2">
+						<input id="alipay" type="radio" name="pay-method" checked="">
+						<label for="alipay" class="pay-button">
+							<img src="../images/alipay.png">
+						</label>
+						<input id="wechat" type="radio" name="pay-method">
+						<label for="wechat" class="pay-button">
+							<img src="../images/wechat.png">
+						</label>
+					</div>
+				</div>
+				<span class="layui-layer-setwin"><a class="layui-layer-close" id="layer_close"></a></span>
+			</div>
+		</div>
 		<h3 class="comment_head">评论<span><em id="total_num" total_page="">0</em>条评论</span></h3>
 		<ul class="comment_list">
 			
 		</ul>
-		<div class="comment_load" cur_page="0" style="display:none;">
+		<div class="comment_load" cur_page="1" style="display:none;">
 			<a id="load_more">加载更多</a>
 		</div>
 		<div class="comment_add" id="main_comment_add">
